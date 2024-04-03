@@ -1,5 +1,5 @@
 import { useState } from "react"
-import useSectionStore from "../../hook/useStore";
+import useSectionStore from "../../hook/useSectionStore";
 
 const DescriptivePage = () => {
     const [titleSection, setTitleSection] = useState('');
@@ -9,6 +9,7 @@ const DescriptivePage = () => {
 
     const sections = useSectionStore((state) => state.sections);
     const addSection = useSectionStore((state) => state.addSection);
+    const [idSection, setIdSection] = useState(0);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -20,7 +21,10 @@ const DescriptivePage = () => {
         }
 
         // Create a new object for section
-        const newSection = { title: titleSection, hours: academicHours };
+        const newId = idSection + 1;
+        setIdSection(newId);
+        const newSection = { id: newId, title: titleSection, hours: academicHours };
+        console.log(newSection)
         // Add new section to store
         addSection(newSection);
         setMessage('La sección fue registrada exitosamente');
