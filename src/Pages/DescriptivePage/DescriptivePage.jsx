@@ -1,10 +1,14 @@
 import { useState } from "react"
+import useSectionStore from "../../hook/useStore";
 
 const DescriptivePage = () => {
     const [titleSection, setTitleSection] = useState('');
     const [academicHours, setAcademicHours] = useState('');
     const [error, setError] = useState('');
     const [message, setMessage] = useState('');
+
+    const sections = useSectionStore((state) => state.sections);
+    const addSection = useSectionStore((state) => state.addSection);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -14,6 +18,12 @@ const DescriptivePage = () => {
             setError('Todos los campos son obligatorios');
             return;
         }
+
+        // Create a new object for section
+        const newSection = { title: titleSection, hours: academicHours };
+        // Add new section to store
+        addSection(newSection);
+        setMessage('La sección fue registrada exitosamente');
 
         setAcademicHours('');
         setTitleSection('');
@@ -49,13 +59,15 @@ const DescriptivePage = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td className="border px-4 py-2">Unidad 1: Conceptos y características de la P.O.O.</td>
-                            <td className="border px-4 py-2">24 Hrs</td>
+                        { sections.map((section, index) => (
+                            <tr key={index}>
+                            <td className="border px-4 py-2">{section.title}</td>
+                            <td className="border px-4 py-2">{section.hours}</td>
                             <td className="border px-4 py-2">
                                 <button className="bg-blue-500 text-white p-2 rounded-md" onClick={handleSubmit}>Agregar Contenido</button>
                             </td>
                         </tr>
+                        ))}
                     </tbody>
                 </table>
             </div>
