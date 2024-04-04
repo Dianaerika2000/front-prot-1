@@ -72,7 +72,7 @@ export default function ButtonGenerator() {
         // tipo Reto
         if (content.typeContent == 4) {
           html += `<tr style="background-color:#f8cbad">
-            <td><a href="${content.linkContent}" style="text-decoration: none; color: #1948a0; font-weight: 600;">${content.content}</a></td> 
+            <td style="color: #1948a0; font-weight: 600;">${content.content}</td>
             <td>${content.activity}</td>
             <td style="text-align: center;">${content.startDate}</td>
             <td style="text-align: center;">${content.endDate}</td>
@@ -80,9 +80,9 @@ export default function ButtonGenerator() {
         }
 
         // tipo Foro
-        if (content.typeContent == 4) {
+        if (content.typeContent == 5) {
           html += `<tr style="background-color:#ffff00">
-            <td><a href="${content.linkContent}" style="text-decoration: none; color: #1948a0; font-weight: 600;">${content.content}</a></td> 
+            <td style="color: #1948a0; font-weight: 600;">${content.content}</td> 
             <td>${content.activity}</td>
             <td style="text-align: center;">${content.startDate}</td>
             <td style="text-align: center;">${content.endDate}</td>
@@ -123,7 +123,8 @@ export default function ButtonGenerator() {
         onClick={handleExportHTML}
         className="bg-red-500 text-white p-2 rounded-md"
       >
-        Exportar Carta Descriptiva
+        Carta Descriptiva
+        <i className="bi bi-file-earmark-code-fill"></i>
       </button>
     </>
   );
