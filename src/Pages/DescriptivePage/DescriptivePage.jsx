@@ -1,5 +1,6 @@
 import { useState } from "react"
 import useSectionStore from "../../hook/useStore";
+import { Link } from "react-router-dom";
 
 const DescriptivePage = () => {
     const [titleSection, setTitleSection] = useState('');
@@ -64,7 +65,9 @@ const DescriptivePage = () => {
                             <td className="border px-4 py-2">{section.title}</td>
                             <td className="border px-4 py-2">{section.hours}</td>
                             <td className="border px-4 py-2">
-                                <button className="bg-blue-500 text-white p-2 rounded-md" onClick={handleSubmit}>Agregar Contenido</button>
+                                <Link className="bg-blue-500 text-white p-2 rounded-md"
+                                to={`/contenido/${index}`} 
+                                >Agregar Contenido</Link>
                             </td>
                         </tr>
                         ))}

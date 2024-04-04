@@ -1,11 +1,23 @@
-import create from 'zustand';
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
-const useSectionStore = create((set) => ({
-  sections: [], // Array para almacenar las unidades registradas
-  addSection: (section) =>
-    set((state) => ({
-      sections: [...state.sections, section], // Agregar la nueva unidad al array
-    })),
-}));
+const useSectionStore = create(
+  persist(
+    (set) => ({
+      sections: [], // Array para almacenar las secciones
+      addSection: (section) =>
+        set((state) => ({
+          sections: [...state.sections, { ...section, contents: [] }],
+        })),
+      addContentToSection: (sectionIndex, content) =>
+        set((state) => ({
+          sections: state.sections.map((section, index) =>
+            index === sectionIndex
+              ? { ...section, contents: [...section.contents, content] }
+              : section
+          ),
+        })),
+    }), { name: 'section-storage' })
+);
 
 export default useSectionStore;
