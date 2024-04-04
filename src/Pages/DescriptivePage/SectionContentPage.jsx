@@ -26,8 +26,10 @@ export default function SectionContentPage() {
 
     // Add new content to the current section
     addContentToSection(parseInt(id), { content, activity, startDate, endDate });
-
     setMessage('El contenido fue registrado exitosamente');
+    setTimeout(() => {
+      setMessage(null);
+    }, 2000);
 
     // Clear fields and error message after submission
     setContent('');
@@ -88,7 +90,6 @@ export default function SectionContentPage() {
             </tr>
           </thead>
           <tbody>
-            {/* Renderiza los contenidos de la sección actual */}
             {sectionFromStore.contents.map((content, index) => (
               <tr key={index}>
                 <td className="border px-4 py-2">{content.content}</td>
