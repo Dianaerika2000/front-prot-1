@@ -111,7 +111,7 @@ export default function ButtonCronogramaGenerator() {
     // Crear un enlace para la descarga
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'carta_descriptiva.html';
+    a.download = 'cronograma.html';
     a.click();
 
     URL.revokeObjectURL(url);
