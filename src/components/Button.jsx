@@ -17,7 +17,6 @@ export default function ButtonGenerator() {
     // Iterar sobre cada sección y contenido para agregarlos a la tabla
     sections.forEach((section, index) => {
       const countTypeContent1 = section.contents.filter(item => item.typeContent === "1").length;
-      console.log('countTypeContent1', countTypeContent1);
 
       html += `<tr> 
         <th colspan="5" style="background-color: #1948a0; color: white;">${section.title}</th> 
@@ -33,11 +32,11 @@ export default function ButtonGenerator() {
       section.contents.forEach((content, contentIndex) => {
         if (content.typeContent == 1 && contentIndex == 0) {
           html += `<tr>
-                      <td rowspan="${section.contents.length}">${section.hours}</td>
-                      <td>${content.content}</td> 
+                      <td rowspan="${section.contents.length}" style="text-align: center;">${section.hours}</td>
+                      <td><a href="${content.linkContent}" style="text-decoration: none; color: #1948a0; font-weight: 600;">${content.content}</a></td> 
                       <td>${content.activity}</td> 
-                      <td rowspan="${countTypeContent1}">${content.startDate}</td> 
-                      <td rowspan="${countTypeContent1}">${content.endDate}</td>
+                      <td rowspan="${countTypeContent1}" style="text-align: center;">${content.startDate}</td> 
+                      <td rowspan="${countTypeContent1}" style="text-align: center;">${content.endDate}</td>
                     </tr>`;
         }
 
@@ -45,7 +44,7 @@ export default function ButtonGenerator() {
         if (content.typeContent == 1 && contentIndex != 0) {
           html += `
           <tr>
-            <td>${content.content}</td> 
+            <td><a href="${content.linkContent}" style="text-decoration: none; color: #1948a0; font-weight: 600;">${content.content}</a></td> 
             <td>${content.activity}</td> 
           </tr>`
         }
@@ -53,40 +52,40 @@ export default function ButtonGenerator() {
         //tipo autoevaluacion
         if (content.typeContent == 2) {
           html += `<tr style="background-color:#e8ecf5">
-            <td>${content.content}</td> 
+            <td><a href="${content.linkContent}" style="text-decoration: none; color: #1948a0; font-weight: 600;">${content.content}</a></td> 
             <td>${content.activity}</td>
-            <td>${content.startDate}</td>
-            <td>${content.endDate}</td>
+            <td style="text-align: center;">${content.startDate}</td>
+            <td style="text-align: center;">${content.endDate}</td>
           </tr>`
         }
 
         //tipo video conferencia
         if (content.typeContent == 3) {
           html += `<tr style="background-color:#ffff00">
-            <td>${content.content}</td> 
+            <td><a href="${content.linkContent}" style="text-decoration: none; color: #1948a0; font-weight: 600;">${content.content}</a></td> 
             <td>${content.activity}</td>
-            <td>${content.startDate}</td>
-            <td>${content.endDate}</td>
+            <td style="text-align: center;">${content.startDate}</td>
+            <td style="text-align: center;">${content.endDate}</td>
           </tr>`
         }
 
         // tipo Reto
         if (content.typeContent == 4) {
           html += `<tr style="background-color:#f8cbad">
-            <td>${content.content}</td> 
+            <td><a href="${content.linkContent}" style="text-decoration: none; color: #1948a0; font-weight: 600;">${content.content}</a></td> 
             <td>${content.activity}</td>
-            <td>${content.startDate}</td>
-            <td>${content.endDate}</td>
+            <td style="text-align: center;">${content.startDate}</td>
+            <td style="text-align: center;">${content.endDate}</td>
           </tr>`
         }
 
         // tipo Foro
         if (content.typeContent == 4) {
           html += `<tr style="background-color:#ffff00">
-            <td>${content.content}</td> 
+            <td><a href="${content.linkContent}" style="text-decoration: none; color: #1948a0; font-weight: 600;">${content.content}</a></td> 
             <td>${content.activity}</td>
-            <td>${content.startDate}</td>
-            <td>${content.endDate}</td>
+            <td style="text-align: center;">${content.startDate}</td>
+            <td style="text-align: center;">${content.endDate}</td>
           </tr>`
         }
       });
@@ -102,15 +101,29 @@ export default function ButtonGenerator() {
   const handleExportHTML = () => {
     const htmlContent = generateHTML();
     console.log(htmlContent);
+
+    // Crear un blob con el HTML generado
+    const blob = new Blob([htmlContent], { type: 'text/html' });
+
+    // Crear una URL de objeto para el blob
+    const url = URL.createObjectURL(blob);
+
+    // Crear un enlace para la descarga
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'carta_descriptiva.html';
+    a.click();
+
+    URL.revokeObjectURL(url);
   };
 
   return (
     <>
       <button
         onClick={handleExportHTML}
-        className="bg-blue-500 text-white p-2 rounded-md"
+        className="bg-red-500 text-white p-2 rounded-md"
       >
-        Exportar a HTML
+        Exportar Carta Descriptiva
       </button>
     </>
   );
