@@ -119,7 +119,6 @@ export default function SectionContentPage() {
             </tr>
           </thead>
           <tbody>
-            {/* Renderiza los contenidos de la sección actual */}
             {sectionFromStore.contents.map((content, index) => (
               <tr key={index}>
                 <td className="border px-4 py-2">{content.content}</td>

@@ -1,6 +1,7 @@
 import { useState } from "react"
 import useSectionStore from "../../hook/useStore";
 import { Link } from "react-router-dom";
+import generateHTML from "./GenerateHtml";
 
 const DescriptivePage = () => {
     const [titleSection, setTitleSection] = useState('');
@@ -24,6 +25,7 @@ const DescriptivePage = () => {
         const newSection = { title: titleSection, hours: academicHours };
         // Add new section to store
         addSection(newSection);
+        console.log(sections)
         setMessage('La sección fue registrada exitosamente');
         setTimeout(() => {
             setMessage(null);
@@ -32,6 +34,24 @@ const DescriptivePage = () => {
         setAcademicHours('');
         setTitleSection('');
         setError('');
+    };
+
+    const handleGenerateHTML = () => {
+        const html = generateHTML(sections); 
+
+        // Crear un blob con el HTML generado
+        const blob = new Blob([html], { type: 'text/html' });
+
+        // Crear una URL de objeto para el blob
+        const url = URL.createObjectURL(blob);
+
+        // Crear un enlace para la descarga
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'carta_descriptiva.html';
+        a.click();
+
+        URL.revokeObjectURL(url);
     };
 
     return (
@@ -54,7 +74,8 @@ const DescriptivePage = () => {
             </div>
 
             <div className="bg-white p-4 rounded-md shadow-md mt-6">
-                <table className="w-full border">
+                <button type="submit" onClick={handleGenerateHTML} className="bg-blue-500 text-white p-2 rounded-md">Descargar Carta Descriptiva</button>
+                <table className="w-full border mt-6">
                     <thead>
                         <tr className="bg-gray-200">
                             <th className="border px-4 py-2">Título de la Sección</th>
