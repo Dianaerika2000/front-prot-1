@@ -3,6 +3,7 @@ import useSectionStore from "../../hook/useStore";
 import { Link } from "react-router-dom";
 import generateHTML from "./GenerateHtml";
 import ButtonGenerator from "../../components/Button";
+import ButtonCronogramaGenerator from "../../components/ButtonCronograma";
 
 const DescriptivePage = () => {
     const [titleSection, setTitleSection] = useState('');
@@ -75,6 +76,9 @@ const DescriptivePage = () => {
             </div>
 
             <div className="bg-white p-4 rounded-md shadow-md mt-6">
+                <div className="float-right py-5">
+                    <ButtonCronogramaGenerator/>
+                </div>
                 <div className="float-right py-5">
                     <ButtonGenerator/>
                 </div>

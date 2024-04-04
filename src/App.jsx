@@ -3,6 +3,7 @@ import './App.css'
 import DescriptivePage from './Pages/DescriptivePage/DescriptivePage'
 import SectionContentPage from './Pages/DescriptivePage/SectionContentPage'
 import ButtonGenerator from './components/Button'
+import ButtonCronogramaGenerator from './components/ButtonCronograma'
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
           <Route path='/' element={<DescriptivePage/>}/>
           <Route path='/contenido/:id' element={<SectionContentPage/>}/>
           <Route path='/html' element={<ButtonGenerator/>}/>
+          <Route path='/cronograma-html' element={<ButtonCronogramaGenerator/>}/>
           
         </Routes>
       </BrowserRouter>
