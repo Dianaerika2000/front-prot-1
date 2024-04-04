@@ -9,6 +9,8 @@ export default function SectionContentPage() {
   const [endDate, setEndDate] = useState('');
   const [content, setContent] = useState('');
   const [activity, setActivity] = useState('');
+  const [typeContent, setTypeContent] = useState('1');
+  const [linkContent, setLinkContent] = useState('');
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
 
@@ -25,7 +27,7 @@ export default function SectionContentPage() {
     }
 
     // Add new content to the current section
-    addContentToSection(parseInt(id), { content, activity, startDate, endDate });
+    addContentToSection(parseInt(id), { content, activity, startDate, endDate, typeContent, linkContent });
     setMessage('El contenido fue registrado exitosamente');
     setTimeout(() => {
       setMessage(null);
@@ -37,6 +39,12 @@ export default function SectionContentPage() {
     setStartDate('');
     setEndDate('');
     setError('');
+    setLinkContent('');
+  };
+
+  const handleChangeTypeContent = (e) => {
+    const selectedTypeContent = e.target.value;
+    setTypeContent(selectedTypeContent);
   };
 
   return (
@@ -63,13 +71,34 @@ export default function SectionContentPage() {
             <div className="w-full px-2 mb-4">
               <label className="block mb-2">
                 Contenido:
-                <input type="text" value={content} onChange={(e) => setContent(e.target.value)} className="w-full p-2 border rounded-md" />
+                <input type="text" placeholder="Lección 1.1: Conceptos de la P.O.O." value={content} onChange={(e) => setContent(e.target.value)} className="w-full p-2 border rounded-md" />
               </label>
             </div>
             <div className="w-full px-2 mb-4">
               <label className="block mb-2">
                 Actividad:
-                <input type="text" value={activity} onChange={(e) => setActivity(e.target.value)} className="w-full p-2 border rounded-md" />
+                <input type="text" placeholder="Realice lectura comprensiva visualizando los 2 videos, 4 esquemas, 2 imagen y 1 tabla. Al finalizar la lección deberá de responder 4 preguntas." value={activity} onChange={(e) => setActivity(e.target.value)} className="w-full p-2 border rounded-md" />
+              </label>
+            </div>
+          </div>
+          <div className="flex flex-wrap -mx-2">
+            <div className="w-full md:w-1/2 px-2 mb-4">
+              <label className="block mb-2">
+                Link del Contenido:
+                <input type="text" placeholder="https://virtual.uagrm.edu.bo/aula/mod/lesson/view.php?id=XXXX" value={linkContent} onChange={(e) => setLinkContent(e.target.value)} className="w-full p-2 border rounded-md" />
+              </label>
+            </div>
+            <div className="w-full md:w-1/2 px-2 mb-4">
+              <label className="block mb-2">
+                Tipo de Contenido:
+                <select value={typeContent} onChange={handleChangeTypeContent} className="w-full p-2 border rounded-md">
+                  <option value="1">Lección</option>
+                  <option value="2">Autoevaluación</option>
+                  <option value="3">Videoconferencia</option>
+                  <option value="4">Reto</option>
+                  <option value="5">Foro</option>
+                  <option value="6">Parcial</option>
+                </select>
               </label>
             </div>
           </div>
