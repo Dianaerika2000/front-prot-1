@@ -5,68 +5,113 @@ export default function ButtonGenerator() {
   // Función para generar el HTML de la tabla
   const generateHTML = () => {
     let html = `<!DOCTYPE html> 
-<html lang="en"> 
-  <head> 
-    <meta charset="UTF-8" /> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
-    <title>Generador-HTML</title> 
-  </head> 
-  <body> 
-    <table border="1" cellpadding="5" cellspacing="0">`
+      <html lang="en"> 
+        <head> 
+          <meta charset="UTF-8" /> 
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
+          <title>Generador-HTML</title> 
+        </head> 
+        <body> 
+          <table border="1" cellpadding="5" cellspacing="0">`
+
     // Iterar sobre cada sección y contenido para agregarlos a la tabla
     sections.forEach((section, index) => {
-      const rowspan = section.contents.length;
+      const countTypeContent1 = section.contents.filter(item => item.typeContent === "1").length;
+      console.log('countTypeContent1', countTypeContent1);
+
       html += `<tr> 
-        <th colspan="5">${section.title}</th> 
+        <th colspan="5" style="background-color: #1948a0; color: white;">${section.title}</th> 
       </tr> 
       <tr> 
-        <th>HORAS ACADÉMICAS</th> 
-        <th>CONTENIDO</th> 
-        <th>ACTIVIDAD</th> 
-        <th>FECHA INICIO</th> 
-        <th>FECHA DE FINALIZACIÓN</th> 
-      </tr>
-      <tr>
-        <td rowspan="${section.contents.length}">${section.hours}</td>
-      `;
+        <th>Horas Académicas</th> 
+        <th>Contenido</th> 
+        <th>Actividad</th> 
+        <th>Fecha Inicio</th> 
+        <th>Fecha de Finalización</th> 
+      </tr>`
 
       section.contents.forEach((content, contentIndex) => {
-        // Agregar las filas de contenido
-        html += `
-        <td>${content.content}</td> 
-        <td>${content.activity}</td> 
-        <td rowspan="${section.contents.length}>${content.startDate}</td> 
-        <td rowspan="${section.contents.length}>${content.endDate}</td> 
-      </tr>
-        `
+        if (content.typeContent == 1 && contentIndex == 0) {
+          html += `<tr>
+                      <td rowspan="${section.contents.length}">${section.hours}</td>
+                      <td>${content.content}</td> 
+                      <td>${content.activity}</td> 
+                      <td rowspan="${countTypeContent1}">${content.startDate}</td> 
+                      <td rowspan="${countTypeContent1}">${content.endDate}</td>
+                    </tr>`;
+        }
+
+        // tipo leccion
+        if (content.typeContent == 1 && contentIndex != 0) {
+          html += `
+          <tr>
+            <td>${content.content}</td> 
+            <td>${content.activity}</td> 
+          </tr>`
+        }
+
+        //tipo autoevaluacion
+        if (content.typeContent == 2) {
+          html += `<tr style="background-color:#e8ecf5">
+            <td>${content.content}</td> 
+            <td>${content.activity}</td>
+            <td>${content.startDate}</td>
+            <td>${content.endDate}</td>
+          </tr>`
+        }
+
+        //tipo video conferencia
+        if (content.typeContent == 3) {
+          html += `<tr style="background-color:#ffff00">
+            <td>${content.content}</td> 
+            <td>${content.activity}</td>
+            <td>${content.startDate}</td>
+            <td>${content.endDate}</td>
+          </tr>`
+        }
+
+        // tipo Reto
+        if (content.typeContent == 4) {
+          html += `<tr style="background-color:#f8cbad">
+            <td>${content.content}</td> 
+            <td>${content.activity}</td>
+            <td>${content.startDate}</td>
+            <td>${content.endDate}</td>
+          </tr>`
+        }
+
+        // tipo Foro
+        if (content.typeContent == 4) {
+          html += `<tr style="background-color:#ffff00">
+            <td>${content.content}</td> 
+            <td>${content.activity}</td>
+            <td>${content.startDate}</td>
+            <td>${content.endDate}</td>
+          </tr>`
+        }
       });
     });
     // Cerrar la tabla y el documento HTML
     html += `
-    </table> 
-  </body> 
-</html>`;
+          </table> 
+        </body> 
+      </html>`;
     return html;
   };
 
   const handleExportHTML = () => {
     const htmlContent = generateHTML();
     console.log(htmlContent);
-    // const blob = new Blob([htmlContent], { type: "text/html;charset=utf-8" });
-    // saveAs(blob, "carta_descriptiva.html");
   };
 
   return (
     <>
-      <div className="bg-white p-4 rounded-md shadow-md">
-        <h2 className="text-xl font-bold mb-4">Formulario Carta Descriptiva</h2>
-        <button
-          onClick={handleExportHTML}
-          className="bg-blue-500 text-white p-2 rounded-md"
-        >
-          Exportar a HTML
-        </button>
-      </div>
+      <button
+        onClick={handleExportHTML}
+        className="bg-blue-500 text-white p-2 rounded-md"
+      >
+        Exportar a HTML
+      </button>
     </>
   );
 }
