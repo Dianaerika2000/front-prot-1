@@ -25,6 +25,9 @@ const DescriptivePage = () => {
         // Add new section to store
         addSection(newSection);
         setMessage('La sección fue registrada exitosamente');
+        setTimeout(() => {
+            setMessage(null);
+        }, 2000);
 
         setAcademicHours('');
         setTitleSection('');
@@ -60,16 +63,16 @@ const DescriptivePage = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        { sections.map((section, index) => (
+                        {sections.map((section, index) => (
                             <tr key={index}>
-                            <td className="border px-4 py-2">{section.title}</td>
-                            <td className="border px-4 py-2">{section.hours}</td>
-                            <td className="border px-4 py-2">
-                                <Link className="bg-blue-500 text-white p-2 rounded-md"
-                                to={`/contenido/${index}`} 
-                                >Agregar Contenido</Link>
-                            </td>
-                        </tr>
+                                <td className="border px-4 py-2">{section.title}</td>
+                                <td className="border px-4 py-2">{section.hours}</td>
+                                <td className="border px-4 py-2">
+                                    <Link className="bg-blue-500 text-white p-2 rounded-md"
+                                        to={`/contenido/${index}`}
+                                    >Agregar Contenido</Link>
+                                </td>
+                            </tr>
                         ))}
                     </tbody>
                 </table>
