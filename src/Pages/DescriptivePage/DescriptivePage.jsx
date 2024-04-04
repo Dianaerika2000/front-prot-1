@@ -2,6 +2,7 @@ import { useState } from "react"
 import useSectionStore from "../../hook/useStore";
 import { Link } from "react-router-dom";
 import generateHTML from "./GenerateHtml";
+import ButtonGenerator from "../../components/Button";
 
 const DescriptivePage = () => {
     const [titleSection, setTitleSection] = useState('');
@@ -74,7 +75,10 @@ const DescriptivePage = () => {
             </div>
 
             <div className="bg-white p-4 rounded-md shadow-md mt-6">
-                <button type="submit" onClick={handleGenerateHTML} className="bg-blue-500 text-white p-2 rounded-md">Descargar Carta Descriptiva</button>
+                <div className="float-right py-5">
+                    <ButtonGenerator/>
+                </div>
+                {/* <button type="submit" onClick={handleGenerateHTML} className="bg-blue-500 text-white p-2 rounded-md">Descargar Carta Descriptiva</button> */}
                 <table className="w-full border mt-6">
                     <thead>
                         <tr className="bg-gray-200">
