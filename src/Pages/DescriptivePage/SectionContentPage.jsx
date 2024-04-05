@@ -114,7 +114,7 @@ export default function SectionContentPage() {
         </form>
       </div>
       <div className="bg-white p-4 rounded-md shadow-md mt-6">
-        <table className="w-full border">
+        <table className="w-full border text-start">
           <thead>
             <tr className="bg-gray-200">
               <th className="border px-4 py-2">Contenido</th>
