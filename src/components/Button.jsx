@@ -12,7 +12,7 @@ export default function ButtonGenerator() {
           <title>Generador-HTML</title> 
         </head> 
         <body> 
-          <table border="1" cellpadding="5" cellspacing="0">`
+          <table border="1" cellpadding="5" cellspacing="0" style="font-family: Calibri; border-width: 1px; border-color: #C0C2CD;">`
 
     // Iterar sobre cada sección y contenido para agregarlos a la tabla
     sections.forEach((section, index) => {
