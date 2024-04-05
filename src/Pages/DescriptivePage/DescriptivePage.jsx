@@ -1,7 +1,6 @@
 import { useState } from "react"
 import useSectionStore from "../../hook/useStore";
 import { Link } from "react-router-dom";
-import generateHTML from "./GenerateHtml";
 import ButtonGenerator from "../../components/Button";
 import ButtonCronogramaGenerator from "../../components/ButtonCronograma";
 
@@ -133,7 +132,7 @@ const DescriptivePage = () => {
                                 <td className="border px-4 py-2">{section.title}</td>
                                 <td className="border px-4 py-2">{section.hours}</td>
                                 <td className="border px-4 py-2">
-                                    <Link className="bg-blue-500 text-white p-2 rounded-md"
+                                    <Link className="bg-blue-500 text-white p-2 rounded-lg mr-2"
                                         to={`/contenido/${index}`}
                                     >Agregar Contenido</Link>
                                 </td>
