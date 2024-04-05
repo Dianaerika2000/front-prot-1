@@ -16,6 +16,8 @@ const DescriptivePage = () => {
     const addSection = useSectionStore((state) => state.addSection);
 
     // Fecha de período
+    const startDatePeriod = useSectionStore((state) => state.startDate);
+    const endDatePeriod = useSectionStore((state) => state.endDate);
     const addPeriodDate = useSectionStore((state) => state.addPeriodDate);
 
     const handleSubmit = (e) => {
