@@ -33,7 +33,7 @@ const DescriptivePage = () => {
         const newSection = { title: titleSection, hours: academicHours };
         // Add new section to store
         addSection(newSection);
-        addPeriodDate({ startDate: startDate, endDate: endDate});
+        addPeriodDate({ startDate: startDate, endDate: endDate });
         setMessage('La sección fue registrada exitosamente');
         setTimeout(() => {
             setMessage(null);
@@ -71,7 +71,7 @@ const DescriptivePage = () => {
     return (
         <>
             <div className="flex flex-wrap space-x-10">
-                <div className="bg-white p-4 rounded-md shadow-md w-2/3">
+                <div className="bg-white p-4 rounded-md shadow-md w-2/3 text-left">
                     <h2 className="text-xl font-bold mb-4">Formulario Carta Descriptiva</h2>
                     {message && <p className="text-green-500 mb-2">{message}</p>}
                     <form onSubmit={handleSubmit}>
@@ -90,7 +90,13 @@ const DescriptivePage = () => {
                 <div className="bg-white p-4 rounded-md shadow-md w-1/4">
                     <h2 className="text-xl font-bold mb-4">Fechas de Período Académico</h2>
                     {/* {message && <p className="text-green-500 mb-2">{message}</p>} */}
-                    <form onSubmit={handleSubmitPeriod}>
+                    {startDatePeriod && endDatePeriod && (
+                        <div className="mt-4 text-left bg-blue-200 p-4 rounded-md">
+                            <p>Fecha de Inicio: {new Date(startDatePeriod).toLocaleDateString('es-ES')}</p>
+                            <p>Fecha de Fin: {new Date(endDatePeriod).toLocaleDateString('es-ES')}</p>
+                        </div>
+                    )}
+                    <form onSubmit={handleSubmitPeriod} className="text-start">
                         <label className="block mb-2">
                             Fecha de Inicio:
                             <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} className="w-full p-2 border rounded-md" />
