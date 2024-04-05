@@ -11,8 +11,6 @@ const DescriptivePage = () => {
     const [message, setMessage] = useState('');
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
-    const [errorDate, setErrorDate] = useState('');
-    const [messageDate, setMessageDate] = useState('');
 
     const sections = useSectionStore((state) => state.sections);
     const addSection = useSectionStore((state) => state.addSection);
@@ -129,9 +127,6 @@ const DescriptivePage = () => {
                                     <Link className="bg-blue-500 text-white p-2 rounded-lg mr-2"
                                         to={`/contenido/${index}`}
                                     >Agregar Contenido</Link>
-                                    <Link className="bg-amber-400 text-white p-2 rounded-lg"
-                                        to={`/contenido/${index}`}
-                                    >Editar</Link>
                                 </td>
                             </tr>
                         ))}
