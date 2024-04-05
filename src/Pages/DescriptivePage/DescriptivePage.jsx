@@ -10,9 +10,16 @@ const DescriptivePage = () => {
     const [academicHours, setAcademicHours] = useState('');
     const [error, setError] = useState('');
     const [message, setMessage] = useState('');
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
 
     const sections = useSectionStore((state) => state.sections);
     const addSection = useSectionStore((state) => state.addSection);
+
+    // Fecha de período
+    const startDatePeriod = useSectionStore((state) => state.startDate);
+    const endDatePeriod = useSectionStore((state) => state.endDate);
+    const addPeriodDate = useSectionStore((state) => state.addPeriodDate);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -27,62 +34,85 @@ const DescriptivePage = () => {
         const newSection = { title: titleSection, hours: academicHours };
         // Add new section to store
         addSection(newSection);
-        console.log(sections)
+        addPeriodDate({ startDate: startDate, endDate: endDate});
         setMessage('La sección fue registrada exitosamente');
         setTimeout(() => {
             setMessage(null);
         }, 2000);
+        console.log(sections)
 
         setAcademicHours('');
         setTitleSection('');
         setError('');
     };
 
-    const handleGenerateHTML = () => {
-        const html = generateHTML(sections); 
+    const handleSubmitPeriod = (e) => {
+        e.preventDefault();
 
-        // Crear un blob con el HTML generado
-        const blob = new Blob([html], { type: 'text/html' });
+        // Validate that all fields are completed
+        if (!startDate || !endDate) {
+            setError('Todos los campos son obligatorios');
+            return;
+        }
 
-        // Crear una URL de objeto para el blob
-        const url = URL.createObjectURL(blob);
+        // Create a new object for period
+        const newPeriod = { startDate: startDate, endDate: endDate };
+        addPeriodDate(newPeriod);
+        /* setMessage('Se guardaron las fechas correctamente');
+        setTimeout(() => {
+            setMessage(null);
+        }, 2000); */
+        console.log(endDate, startDate)
 
-        // Crear un enlace para la descarga
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'carta_descriptiva.html';
-        a.click();
-
-        URL.revokeObjectURL(url);
+        setStartDate('');
+        setEndDate('');
+        setError('');
     };
 
     return (
         <>
-            <div className="bg-white p-4 rounded-md shadow-md">
-                <h2 className="text-xl font-bold mb-4">Formulario Carta Descriptiva</h2>
-                {message && <p className="text-green-500 mb-2">{message}</p>}
-                <form onSubmit={handleSubmit}>
-                    <label className="block mb-2">
-                        Título de la Sección:
-                        <input type="text" placeholder="Unidad 1: Conceptos y características de la P.O.O." value={titleSection} onChange={(e) => setTitleSection(e.target.value)} className="w-full p-2 border rounded-md" />
-                    </label>
-                    <label className="block mb-2">
-                        Horas Académicas:
-                        <input type="text" placeholder="24 Hrs" value={academicHours} onChange={(e) => setAcademicHours(e.target.value)} className="w-full p-2 border rounded-md" />
-                    </label>
-                    {error && <p className="text-red-500 mb-2">{error}</p>}
-                    <button type="submit" className="bg-blue-500 text-white p-2 rounded-md">Registrar</button>
-                </form>
+            <div className="flex flex-wrap space-x-10">
+                <div className="bg-white p-4 rounded-md shadow-md w-2/3">
+                    <h2 className="text-xl font-bold mb-4">Formulario Carta Descriptiva</h2>
+                    {message && <p className="text-green-500 mb-2">{message}</p>}
+                    <form onSubmit={handleSubmit}>
+                        <label className="block mb-2">
+                            Título de la Sección:
+                            <input type="text" placeholder="Unidad 1: Conceptos y características de la P.O.O." value={titleSection} onChange={(e) => setTitleSection(e.target.value)} className="w-full p-2 border rounded-md" />
+                        </label>
+                        <label className="block mb-2">
+                            Horas Académicas:
+                            <input type="text" placeholder="24 Hrs" value={academicHours} onChange={(e) => setAcademicHours(e.target.value)} className="w-full p-2 border rounded-md" />
+                        </label>
+                        {error && <p className="text-red-500 mb-2">{error}</p>}
+                        <button type="submit" className="bg-blue-500 text-white p-2 rounded-md">Registrar</button>
+                    </form>
+                </div>
+                <div className="bg-white p-4 rounded-md shadow-md w-1/4">
+                    <h2 className="text-xl font-bold mb-4">Fechas de Período Académico</h2>
+                    {/* {message && <p className="text-green-500 mb-2">{message}</p>} */}
+                    <form onSubmit={handleSubmitPeriod}>
+                        <label className="block mb-2">
+                            Fecha de Inicio:
+                            <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} className="w-full p-2 border rounded-md" />
+                        </label>
+                        <label className="block mb-2">
+                            Fecha de Fin:
+                            <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} className="w-full p-2 border rounded-md" />
+                        </label>
+                        {error && <p className="text-red-500 mb-2">{error}</p>}
+                        <button type="submit" className="bg-blue-500 text-white p-2 rounded-md">Registrar</button>
+                    </form>
+                </div>
             </div>
 
             <div className="bg-white p-4 rounded-md shadow-md mt-6">
                 <div className="float-right py-5">
-                    <ButtonCronogramaGenerator/>
+                    <ButtonCronogramaGenerator />
                 </div>
                 <div className="float-right py-5">
-                    <ButtonGenerator/>
+                    <ButtonGenerator />
                 </div>
-                {/* <button type="submit" onClick={handleGenerateHTML} className="bg-blue-500 text-white p-2 rounded-md">Descargar Carta Descriptiva</button> */}
                 <table className="w-full border mt-6">
                     <thead>
                         <tr className="bg-gray-200">
