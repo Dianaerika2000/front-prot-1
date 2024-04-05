@@ -1,7 +1,6 @@
 import { useState } from "react"
 import useSectionStore from "../../hook/useStore";
 import { Link } from "react-router-dom";
-import generateHTML from "./GenerateHtml";
 import ButtonGenerator from "../../components/Button";
 import ButtonCronogramaGenerator from "../../components/ButtonCronograma";
 
@@ -12,13 +11,13 @@ const DescriptivePage = () => {
     const [message, setMessage] = useState('');
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
+    const [errorDate, setErrorDate] = useState('');
+    const [messageDate, setMessageDate] = useState('');
 
     const sections = useSectionStore((state) => state.sections);
     const addSection = useSectionStore((state) => state.addSection);
 
     // Fecha de período
-    const startDatePeriod = useSectionStore((state) => state.startDate);
-    const endDatePeriod = useSectionStore((state) => state.endDate);
     const addPeriodDate = useSectionStore((state) => state.addPeriodDate);
 
     const handleSubmit = (e) => {
@@ -127,9 +126,12 @@ const DescriptivePage = () => {
                                 <td className="border px-4 py-2">{section.title}</td>
                                 <td className="border px-4 py-2">{section.hours}</td>
                                 <td className="border px-4 py-2">
-                                    <Link className="bg-blue-500 text-white p-2 rounded-md"
+                                    <Link className="bg-blue-500 text-white p-2 rounded-lg mr-2"
                                         to={`/contenido/${index}`}
                                     >Agregar Contenido</Link>
+                                    <Link className="bg-amber-400 text-white p-2 rounded-lg"
+                                        to={`/contenido/${index}`}
+                                    >Editar</Link>
                                 </td>
                             </tr>
                         ))}
