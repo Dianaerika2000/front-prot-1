@@ -25,6 +25,13 @@ const useSectionStore = create(
           startDate: startDate !== undefined ? startDate : state.startDate,
           endDate: endDate !== undefined ? endDate : state.endDate,
         })),
+      updateSection: (index, updatedSection) =>
+        set((state) => ({
+          ...state,
+          sections: state.sections.map((section, i) => 
+            i === index ? updatedSection : section
+          ),
+        }))
     }), { name: 'section-storage' })
 );
 

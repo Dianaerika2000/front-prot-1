@@ -100,7 +100,6 @@ export default function ButtonGenerator() {
 
   const handleExportHTML = () => {
     const htmlContent = generateHTML();
-    console.log(htmlContent);
 
     // Crear un blob con el HTML generado
     const blob = new Blob([htmlContent], { type: 'text/html' });
