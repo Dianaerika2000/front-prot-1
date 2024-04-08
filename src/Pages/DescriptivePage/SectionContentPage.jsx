@@ -14,8 +14,10 @@ export default function SectionContentPage() {
   const [linkContent, setLinkContent] = useState('');
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
+  const [contentToEdit, setContentToEdit] = useState(null);
 
   const addContentToSection = useSectionStore((state) => state.addContentToSection);
+  const updateContentInSection = useSectionStore((state) => state.updateContentInSection);
   const sectionFromStore = useSectionStore((state) => state.sections[parseInt(id)]);
 
   const handleSubmitContent = (e) => {
@@ -27,9 +29,14 @@ export default function SectionContentPage() {
       return;
     }
 
-    // Add new content to the current section
-    addContentToSection(parseInt(id), { content, activity, startDate, endDate, typeContent, linkContent });
-    setMessage('El contenido fue registrado exitosamente');
+    if (contentToEdit) {
+      updateContentInSection(parseInt(id), contentToEdit.index, { content, activity, startDate, endDate, typeContent, linkContent });
+      setMessage('El contenido fue actualizado exitosamente');
+    } else {
+      addContentToSection(parseInt(id), { content, activity, startDate, endDate, typeContent, linkContent });
+      setMessage('El contenido fue registrado exitosamente');
+    }
+
     setTimeout(() => {
       setMessage(null);
     }, 2000);
@@ -41,12 +48,37 @@ export default function SectionContentPage() {
     setEndDate('');
     setError('');
     setLinkContent('');
+    setContentToEdit(null);
   };
 
   const handleChangeTypeContent = (e) => {
     const selectedTypeContent = e.target.value;
     setTypeContent(selectedTypeContent);
   };
+
+  // Función para cargar los datos del contenido a editar en el formulario
+  const handleEditContent = (index) => {
+    const contentData = sectionFromStore.contents[index];
+    setContentToEdit({ ...contentData, index }); 
+    setStartDate(contentData.startDate);
+    setEndDate(contentData.endDate);
+    setContent(contentData.content);
+    setActivity(contentData.activity);
+    setTypeContent(contentData.typeContent);
+    setLinkContent(contentData.linkContent);
+  };
+
+  const handleCancel = () => {
+    setContent('');
+    setActivity('');
+    setStartDate('');
+    setEndDate('');
+    setTypeContent('1');
+    setLinkContent('');
+    setError('');
+    setContentToEdit(null);
+  };
+  
 
   return (
     <>
@@ -109,7 +141,12 @@ export default function SectionContentPage() {
           </div>
           <div className="flex justify-end mb-4">
             {error && <p className="text-red-500 mb-2">{error}</p>}
-            <button type="submit" className="bg-blue-500 text-white p-2 rounded-md">Agregar Contenido</button>
+            <button type="button" className="bg-red-600 text-white p-2 rounded-md mr-2" onClick={() => handleCancel()}>
+              {contentToEdit ? 'Cancelar Edición' : 'Cancelar'}
+            </button>
+            <button type="submit" className="bg-blue-500 text-white p-2 rounded-md">
+              {contentToEdit ? 'Editar Contenido' : 'Agregar Contenido'}
+            </button>
           </div>
         </form>
       </div>
@@ -119,8 +156,9 @@ export default function SectionContentPage() {
             <tr className="bg-gray-200">
               <th className="border px-4 py-2">Contenido</th>
               <th className="border px-4 py-2">Actividad</th>
-              <th className="border px-4 py-2">Fecha de Inicio</th>
-              <th className="border px-4 py-2">Fecha de Fin</th>
+              <th className="border px-4 py-2" style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '150px' }}>Fecha de Inicio</th>
+              <th className="border px-4 py-2" style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '150px' }}>Fecha de Fin</th>
+              <th className="border px-4 py-2">Opciones</th>
             </tr>
           </thead>
           <tbody>
@@ -130,6 +168,14 @@ export default function SectionContentPage() {
                 <td className="border px-4 py-2">{content.activity}</td>
                 <td className="border px-4 py-2">{content.startDate}</td>
                 <td className="border px-4 py-2">{content.endDate}</td>
+                <td className="border px-4 py-2">
+                  <button
+                    className="bg-yellow-500 text-dark p-2 rounded-lg mr-2"
+                    onClick={() => handleEditContent(index)}
+                  >
+                    Editar
+                  </button>
+                  </td>
               </tr>
             ))}
           </tbody>

@@ -38,8 +38,6 @@ export default function ButtonCronogramaGenerator() {
         // Agregar filas para cada actividad
         sections.forEach((section, index) => {
             if (section && section.contents && section.contents.length > 0) {
-                console.log('SECTIONS', section)
-
                 let startD = new Date(section.contents[0].startDate);
                 let start_m = startD.getMonth() + 1;
                 let start_d = startD.getDate();
@@ -48,12 +46,16 @@ export default function ButtonCronogramaGenerator() {
                 let end_m = endD.getMonth() + 1;
                 let end_d = endD.getDate();
 
+                // Obtener los días de la fila de sección
+                const differenceTime = endD.getTime() - startD.getTime();
+                const daysBetweenDate = Math.round(differenceTime / (1000 * 3600 * 24));
+
                 // Agregar la fila de sección
                 html += `
                                 <tr>
                                     <td style="border: 1px solid #000000; background-color: #002060; width: 200px; color: white; text-align: center; margin: auto; font-weight: bold;">${section.title}</td>
                                     <td style="border: 1px solid #000000; background-color: #ffffff; width: 200px; color: black; text-align: center; margin: auto;">${section.contents[0].startDate}</td>
-                                    <td style="border: 1px solid #000000; background-color: #ffffff; width: 200px; color: black; text-align: center; margin: auto;">7</td>
+                                    <td style="border: 1px solid #000000; background-color: #ffffff; width: 200px; color: black; text-align: center; margin: auto;">${daysBetweenDate}</td>
                                     <td style="border: 1px solid #000000; background-color: #ffffff; width: 200px; color: black; text-align: center; margin: auto;">${section.contents[0].endDate}</td>
                                     
                                     <td style="${(start_m == 4 && start_d >= 1 && start_d <= 7) || (end_m == 4 && end_d >= 1 && end_d <= 7) || ((start_m < 4 && end_m > 4) || start_m < 4 && end_m >= 4 && end_d > 7) ? marcadoStyle : normalStyle}">&nbsp;</td>
@@ -94,11 +96,16 @@ export default function ButtonCronogramaGenerator() {
                         let endD = new Date(content.endDate);
                         let end_m = endD.getMonth() + 1;
                         let end_d = endD.getDate();
+
+                        // Obtener los días de la fila de contenidos
+                        const differenceTime = endD.getTime() - startD.getTime();
+                        const daysBetweenDate = Math.round(differenceTime / (1000 * 3600 * 24));
+
                         html += `
                                 <tr>
                                     <td style="border: 1px solid #000000; background-color: #ffff00; width: 200px; color: black; text-align: center; margin: auto; font-weight: bold;">${content.content}</td>
                                     <td style="border: 1px solid #000000; background-color: #ffffff; width: 200px; color: black; text-align: center; margin: auto;">${content.startDate}</td>
-                                    <td style="border: 1px solid #000000; background-color: #ffffff; width: 200px; color: black; text-align: center; margin: auto;">7</td>
+                                    <td style="border: 1px solid #000000; background-color: #ffffff; width: 200px; color: black; text-align: center; margin: auto;">${daysBetweenDate}</td>
                                     <td style="border: 1px solid #000000; background-color: #ffffff; width: 200px; color: black; text-align: center; margin: auto;">${content.endDate}</td>                                    
                                     <td style="${(start_m == 4 && start_d >= 1 && start_d <= 7) || (end_m == 4 && end_d >= 1 && end_d <= 7) || ((start_m < 4 && end_m > 4) || start_m < 4 && end_m >= 4 && end_d > 7) ? marcadoStyle : normalStyle}">&nbsp;</td>
                                     <td style="${(start_m == 4 && start_d >= 8 && start_d <= 14) || (end_m == 4 && end_d >= 8 && end_d <= 14) || ((start_m < 4 && end_m > 4) || start_m == 4 && end_m > 4 && start_d < 14 || start_m == 4 && start_d < 7 && end_d > 14 || start_m < 4 && end_m == 4 && end_d > 14) ? marcadoStyle : normalStyle}">&nbsp;</td>
@@ -129,7 +136,6 @@ export default function ButtonCronogramaGenerator() {
 
                     // Reto
                     if (content.typeContent == 4) {
-
                         let startD = new Date(content.startDate);
                         let start_m = startD.getMonth() + 1;
                         let start_d = startD.getDate();
@@ -137,11 +143,16 @@ export default function ButtonCronogramaGenerator() {
                         let endD = new Date(content.endDate);
                         let end_m = endD.getMonth() + 1;
                         let end_d = endD.getDate();
+
+                        // Obtener los días de la fila de contenidos
+                        const differenceTime = endD.getTime() - startD.getTime();
+                        const daysBetweenDate = Math.round(differenceTime / (1000 * 3600 * 24));
+
                         html += `
                                 <tr>
                                     <td style="border: 1px solid #000000; background-color: #f8cbad; width: 200px; color: black; text-align: center; margin: auto; font-weight: bold;">${content.content}</td>
                                     <td style="border: 1px solid #000000; background-color: #ffffff; width: 200px; color: black; text-align: center; margin: auto;">${content.startDate}</td>
-                                    <td style="border: 1px solid #000000; background-color: #ffffff; width: 200px; color: black; text-align: center; margin: auto;">7</td>
+                                    <td style="border: 1px solid #000000; background-color: #ffffff; width: 200px; color: black; text-align: center; margin: auto;">${daysBetweenDate}</td>
                                     <td style="border: 1px solid #000000; background-color: #ffffff; width: 200px; color: black; text-align: center; margin: auto;">${content.endDate}</td>
                                     <td style="${(start_m == 4 && start_d >= 1 && start_d <= 7) || (end_m == 4 && end_d >= 1 && end_d <= 7) || ((start_m < 4 && end_m > 4) || start_m < 4 && end_m >= 4 && end_d > 7) ? marcadoStyle : normalStyle}">&nbsp;</td>
                                     <td style="${(start_m == 4 && start_d >= 8 && start_d <= 14) || (end_m == 4 && end_d >= 8 && end_d <= 14) || ((start_m < 4 && end_m > 4) || start_m == 4 && end_m > 4 && start_d < 14 || start_m == 4 && start_d < 7 && end_d > 14 || start_m < 4 && end_m == 4 && end_d > 14) ? marcadoStyle : normalStyle}">&nbsp;</td>
@@ -180,11 +191,15 @@ export default function ButtonCronogramaGenerator() {
                         let end_m = endD.getMonth() + 1;
                         let end_d = endD.getDate();
 
+                        // Obtener los días de la fila de contenidos
+                        const differenceTime = endD.getTime() - startD.getTime();
+                        const daysBetweenDate = Math.round(differenceTime / (1000 * 3600 * 24));
+
                         html += `
                                 <tr>
                                     <td style="border: 1px solid #000000; background-color: #F2E500; width: 200px; color: black; text-align: center; margin: auto; font-weight: bold;">${content.content}</td>
                                     <td style="border: 1px solid #000000; background-color: #ffffff; width: 200px; color: black; text-align: center; margin: auto;">${content.startDate}</td>
-                                    <td style="border: 1px solid #000000; background-color: #ffffff; width: 200px; color: black; text-align: center; margin: auto;">7</td>
+                                    <td style="border: 1px solid #000000; background-color: #ffffff; width: 200px; color: black; text-align: center; margin: auto;">${daysBetweenDate}</td>
                                     <td style="border: 1px solid #000000; background-color: #ffffff; width: 200px; color: black; text-align: center; margin: auto;">${content.endDate}</td>
                                     <td style="${(start_m == 4 && start_d >= 1 && start_d <= 7) || (end_m == 4 && end_d >= 1 && end_d <= 7) || ((start_m < 4 && end_m > 4) || start_m < 4 && end_m >= 4 && end_d > 7) ? marcadoStyle : normalStyle}">&nbsp;</td>
                                     <td style="${(start_m == 4 && start_d >= 8 && start_d <= 14) || (end_m == 4 && end_d >= 8 && end_d <= 14) || ((start_m < 4 && end_m > 4) || start_m == 4 && end_m > 4 && start_d < 14 || start_m == 4 && start_d < 7 && end_d > 14 || start_m < 4 && end_m == 4 && end_d > 14) ? marcadoStyle : normalStyle}">&nbsp;</td>
@@ -222,11 +237,16 @@ export default function ButtonCronogramaGenerator() {
                         let endD = new Date(content.endDate);
                         let end_m = endD.getMonth() + 1;
                         let end_d = endD.getDate();
+
+                        // Obtener los días de la fila de contenidos
+                        const differenceTime = endD.getTime() - startD.getTime();
+                        const daysBetweenDate = Math.round(differenceTime / (1000 * 3600 * 24));
+
                         html += `
                                 <tr>
                                     <td style="border: 1px solid #000000; background-color: #FF0000; width: 200px; color: black; text-align: center; margin: auto; font-weight: bold;">${content.content}</td>
                                     <td style="border: 1px solid #000000; background-color: #ffffff; width: 200px; color: black; text-align: center; margin: auto;">${content.startDate}</td>
-                                    <td style="border: 1px solid #000000; background-color: #ffffff; width: 200px; color: black; text-align: center; margin: auto;">7</td>
+                                    <td style="border: 1px solid #000000; background-color: #ffffff; width: 200px; color: black; text-align: center; margin: auto;">${daysBetweenDate}</td>
                                     <td style="border: 1px solid #000000; background-color: #ffffff; width: 200px; color: black; text-align: center; margin: auto;">${content.endDate}</td>
                                     <td style="${(start_m == 4 && start_d >= 1 && start_d <= 7) || (end_m == 4 && end_d >= 1 && end_d <= 7) || ((start_m < 4 && end_m > 4) || start_m < 4 && end_m >= 4 && end_d > 7) ? marcadoStyle : normalStyle}">&nbsp;</td>
                                     <td style="${(start_m == 4 && start_d >= 8 && start_d <= 14) || (end_m == 4 && end_d >= 8 && end_d <= 14) || ((start_m < 4 && end_m > 4) || start_m == 4 && end_m > 4 && start_d < 14 || start_m == 4 && start_d < 7 && end_d > 14 || start_m < 4 && end_m == 4 && end_d > 14) ? marcadoStyle : normalStyle}">&nbsp;</td>
@@ -266,8 +286,6 @@ export default function ButtonCronogramaGenerator() {
 
     const handleExportHTML = () => {
         const htmlContent = generateHTML();
-        console.log(htmlContent);
-
         // Crear un blob con el HTML generado
         const blob = new Blob([htmlContent], { type: 'text/html' });
 
