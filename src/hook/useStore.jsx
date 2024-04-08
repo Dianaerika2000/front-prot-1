@@ -38,6 +38,12 @@ const useSectionStore = create(
           startDate: startDate !== undefined ? startDate : state.startDate,
           endDate: endDate !== undefined ? endDate : state.endDate,
         })),
+      updatePeriodDate: ({ startDate, endDate }) =>
+        set((state) => ({
+          ...state,
+          startDate: startDate !== undefined ? startDate : state.startDate,
+          endDate: endDate !== undefined ? endDate : state.endDate,
+        })),
       updateSection: (index, updatedSection) =>
         set((state) => ({
           ...state,
