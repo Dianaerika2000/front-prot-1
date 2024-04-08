@@ -38,8 +38,6 @@ export default function ButtonCronogramaGenerator() {
         // Agregar filas para cada actividad
         sections.forEach((section, index) => {
             if (section && section.contents && section.contents.length > 0) {
-                console.log('SECTIONS', section)
-
                 let startD = new Date(section.contents[0].startDate);
                 let start_m = startD.getMonth() + 1;
                 let start_d = startD.getDate();
@@ -266,8 +264,6 @@ export default function ButtonCronogramaGenerator() {
 
     const handleExportHTML = () => {
         const htmlContent = generateHTML();
-        console.log(htmlContent);
-
         // Crear un blob con el HTML generado
         const blob = new Blob([htmlContent], { type: 'text/html' });
 
