@@ -3,6 +3,7 @@ import useSectionStore from "../../hook/useStore";
 import { Link } from "react-router-dom";
 import ButtonGenerator from "../../components/Button";
 import ButtonCronogramaGenerator from "../../components/ButtonCronograma";
+import DatePeriodComponent from "../../components/DateForm";
 
 const DescriptivePage = () => {
     let [titleSection, setTitleSection] = useState('');
@@ -112,7 +113,7 @@ const DescriptivePage = () => {
                         }
                     </form>
                 </div>
-                <div className="bg-white p-4 rounded-md shadow-md w-1/4">
+                {/* <div className="bg-white p-4 rounded-md shadow-md w-1/4">
                     <h2 className="text-xl font-bold mb-4">Fechas de Período Académico</h2>
                     {startDatePeriod && endDatePeriod && (
                         <div className="mt-4 text-left bg-blue-200 p-4 rounded-md">
@@ -131,7 +132,8 @@ const DescriptivePage = () => {
                         </label>
                         <button type="submit" className="bg-blue-500 text-white p-2 rounded-md">Registrar</button>
                     </form>
-                </div>
+                </div> */}
+                <DatePeriodComponent/>
             </div>
 
             <div className="bg-white p-4 rounded-md shadow-md mt-6">
@@ -159,10 +161,10 @@ const DescriptivePage = () => {
                                         to={`/contenido/${index}`}
                                     >Contenido</Link>
                                     { editingIndex === null ?
-                                        <button className="bg-amber-400 text-white p-1 rounded-lg mr-2" onClick={() => handleEdit(index)} >Editar</button>
+                                        <button className="bg-amber-400 text-white p-2 rounded-lg mr-2" onClick={() => handleEdit(index)} >Editar</button>
                                         : 
                                         editingIndex === index ?
-                                            <button className="bg-red-600 text-white p-1 rounded-lg mr-2" onClick={() => handleCancel()} >Cancelar</button>
+                                            <button className="bg-red-600 text-white p-2 rounded-lg mr-2" onClick={() => handleCancel()} >Cancelar</button>
                                         :
                                             null
                                     }
