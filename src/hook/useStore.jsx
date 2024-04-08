@@ -19,6 +19,19 @@ const useSectionStore = create(
               : section
           ),
         })),
+        updateContentInSection: (sectionIndex, contentIndex, updatedContent) =>
+          set((state) => ({
+            sections: state.sections.map((section, index) =>
+              index === sectionIndex
+                ? {
+                    ...section,
+                    contents: section.contents.map((item, idx) =>
+                      idx === contentIndex ? { ...item, ...updatedContent } : item
+                    ),
+                  }
+                : section
+            ),
+          })),
       addPeriodDate: ({ startDate, endDate }) =>
         set((state) => ({
           ...state,
