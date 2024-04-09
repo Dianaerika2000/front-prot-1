@@ -24,11 +24,22 @@ const useSectionStore = create(
           sections: state.sections.map((section, index) =>
             index === sectionIndex
               ? {
-                ...section,
-                contents: section.contents.map((item, idx) =>
-                  idx === contentIndex ? { ...item, ...updatedContent } : item
-                ),
-              }
+                  ...section,
+                  contents: section.contents.map((item, idx) =>
+                    idx === contentIndex ? { ...item, ...updatedContent } : item
+                  ),
+                }
+              : section
+          ),
+        })),
+      deleteContentInSection: (sectionIndex, contentIndex) =>
+        set((state) => ({
+          sections: state.sections.map((section, index) =>
+            index === sectionIndex
+              ? {
+                  ...section,
+                  contents: section.contents.filter((_, idx) => idx !== contentIndex),
+                }
               : section
           ),
         })),
