@@ -58,10 +58,15 @@ const useSectionStore = create(
       updateSection: (index, updatedSection) =>
         set((state) => ({
           ...state,
-          sections: state.sections.map((section, i) => 
+          sections: state.sections.map((section, i) =>
             i === index ? updatedSection : section
           ),
-        }))
+        })),
+      deleteSection: (index) => 
+        set((state) => ({
+          ...state,
+          sections: state.sections.filter((_, i) => i !== index),
+        })),
     }), { name: 'section-storage' })
 );
 
