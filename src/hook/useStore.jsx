@@ -19,19 +19,30 @@ const useSectionStore = create(
               : section
           ),
         })),
-        updateContentInSection: (sectionIndex, contentIndex, updatedContent) =>
-          set((state) => ({
-            sections: state.sections.map((section, index) =>
-              index === sectionIndex
-                ? {
-                    ...section,
-                    contents: section.contents.map((item, idx) =>
-                      idx === contentIndex ? { ...item, ...updatedContent } : item
-                    ),
-                  }
-                : section
-            ),
-          })),
+      updateContentInSection: (sectionIndex, contentIndex, updatedContent) =>
+        set((state) => ({
+          sections: state.sections.map((section, index) =>
+            index === sectionIndex
+              ? {
+                  ...section,
+                  contents: section.contents.map((item, idx) =>
+                    idx === contentIndex ? { ...item, ...updatedContent } : item
+                  ),
+                }
+              : section
+          ),
+        })),
+      deleteContentInSection: (sectionIndex, contentIndex) =>
+        set((state) => ({
+          sections: state.sections.map((section, index) =>
+            index === sectionIndex
+              ? {
+                  ...section,
+                  contents: section.contents.filter((_, idx) => idx !== contentIndex),
+                }
+              : section
+          ),
+        })),
       addPeriodDate: ({ startDate, endDate }) =>
         set((state) => ({
           ...state,

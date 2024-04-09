@@ -18,6 +18,7 @@ export default function SectionContentPage() {
 
   const addContentToSection = useSectionStore((state) => state.addContentToSection);
   const updateContentInSection = useSectionStore((state) => state.updateContentInSection);
+  const deleteContentInSection = useSectionStore((state) => state.deleteContentInSection);
   const sectionFromStore = useSectionStore((state) => state.sections[parseInt(id)]);
 
   const handleSubmitContent = (e) => {
@@ -66,6 +67,10 @@ export default function SectionContentPage() {
     setActivity(contentData.activity);
     setTypeContent(contentData.typeContent);
     setLinkContent(contentData.linkContent);
+  };
+
+  const handleDeleteContent = (index) => {
+    deleteContentInSection(parseInt(id), index);
   };
 
   const handleCancel = () => {
@@ -141,9 +146,12 @@ export default function SectionContentPage() {
           </div>
           <div className="flex justify-end mb-4">
             {error && <p className="text-red-500 mb-2">{error}</p>}
-            <button type="button" className="bg-red-600 text-white p-2 rounded-md mr-2" onClick={() => handleCancel()}>
-              {contentToEdit ? 'Cancelar Edición' : 'Cancelar'}
-            </button>
+            
+            {contentToEdit && (
+              <button type="button" className="bg-gray-500 text-white p-2 rounded-md mr-2" onClick={() => handleCancel()}>
+                Cancelar
+              </button>
+            )}
             <button type="submit" className="bg-blue-500 text-white p-2 rounded-md">
               {contentToEdit ? 'Editar Contenido' : 'Agregar Contenido'}
             </button>
@@ -162,20 +170,26 @@ export default function SectionContentPage() {
             </tr>
           </thead>
           <tbody>
-            {sectionFromStore.contents.map((content, index) => (
+            {sectionFromStore.contents?.map((content, index) => (
               <tr key={index}>
                 <td className="border px-4 py-2">{content.content}</td>
                 <td className="border px-4 py-2">{content.activity}</td>
-                <td className="border px-4 py-2">{content.startDate}</td>
-                <td className="border px-4 py-2">{content.endDate}</td>
-                <td className="border px-4 py-2">
+                <td className="border px-4 py-2">{new Date(content.startDate).toLocaleDateString()}</td>
+                <td className="border px-4 py-2">{new Date(content.endDate).toLocaleDateString()}</td>
+                <td className="border px-4 py-2 flex">
                   <button
-                    className="bg-yellow-500 text-dark p-2 rounded-lg mr-2"
+                    className="bg-yellow-500 text-dark p-2 rounded-lg mr-2 text-white"
                     onClick={() => handleEditContent(index)}
                   >
-                    Editar
+                    <i className="bi bi-pencil-square"></i>
                   </button>
-                  </td>
+                  <button
+                    className="bg-red-500 text-white p-2 rounded-lg"
+                    onClick={() => handleDeleteContent(index)}
+                  >
+                    <i className="bi bi-trash3-fill"></i>
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
