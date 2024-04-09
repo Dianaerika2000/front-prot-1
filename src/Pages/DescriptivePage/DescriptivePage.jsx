@@ -10,17 +10,11 @@ const DescriptivePage = () => {
     let [academicHours, setAcademicHours] = useState('');
     const [error, setError] = useState('');
     const [message, setMessage] = useState('');
-    const [startDate, setStartDate] = useState('');
-    const [endDate, setEndDate] = useState('');
     const [editingIndex, setEditingIndex] = useState(null);
 
     const sections = useSectionStore((state) => state.sections);
     const addSection = useSectionStore((state) => state.addSection);
-
-    // Fecha de período
-    const startDatePeriod = useSectionStore((state) => state.startDate);
-    const endDatePeriod = useSectionStore((state) => state.endDate);
-    const addPeriodDate = useSectionStore((state) => state.addPeriodDate);
+    const deleteSection = useSectionStore((state) => state.deleteSection);
 
     useEffect(() => {
         if (editingIndex !== null) {
@@ -62,24 +56,6 @@ const DescriptivePage = () => {
         setError('');
     };
 
-    const handleSubmitPeriod = (e) => {
-        e.preventDefault();
-
-        // Validate that all fields are completed
-        if (!startDate || !endDate) {
-            setError('Todos los campos son obligatorios');
-            return;
-        }
-
-        // Create a new object for period
-        const newPeriod = { startDate: startDate, endDate: endDate };
-        addPeriodDate(newPeriod);
-
-        setStartDate('');
-        setEndDate('');
-        setError('');
-    };
-
     const handleEdit = (index) => {
         setEditingIndex(index);
     }
@@ -88,6 +64,10 @@ const DescriptivePage = () => {
         setEditingIndex(null);
         setTitleSection('');
         setAcademicHours('');
+    }
+
+    const handleDelete = (index) => {
+        deleteSection(index);
     }
 
     return (
@@ -113,26 +93,6 @@ const DescriptivePage = () => {
                         }
                     </form>
                 </div>
-                {/* <div className="bg-white p-4 rounded-md shadow-md w-1/4">
-                    <h2 className="text-xl font-bold mb-4">Fechas de Período Académico</h2>
-                    {startDatePeriod && endDatePeriod && (
-                        <div className="mt-4 text-left bg-blue-200 p-4 rounded-md">
-                            <p>Fecha de Inicio: {new Date(startDatePeriod).toLocaleDateString('es-ES')}</p>
-                            <p>Fecha de Fin: {new Date(endDatePeriod).toLocaleDateString('es-ES')}</p>
-                        </div>
-                    )}
-                    <form onSubmit={handleSubmitPeriod} className="text-start">
-                        <label className="block mb-2">
-                            Fecha de Inicio:
-                            <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} className="w-full p-2 border rounded-md" />
-                        </label>
-                        <label className="block mb-2">
-                            Fecha de Fin:
-                            <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} className="w-full p-2 border rounded-md" />
-                        </label>
-                        <button type="submit" className="bg-blue-500 text-white p-2 rounded-md">Registrar</button>
-                    </form>
-                </div> */}
                 <DatePeriodComponent/>
             </div>
 
@@ -161,13 +121,14 @@ const DescriptivePage = () => {
                                         to={`/contenido/${index}`}
                                     >Contenido</Link>
                                     { editingIndex === null ?
-                                        <button className="bg-amber-400 text-white p-2 rounded-lg mr-2" onClick={() => handleEdit(index)} >Editar</button>
+                                        <button className="bg-yellow-500 text-white p-2 rounded-lg mr-2" onClick={() => handleEdit(index)} >Editar</button>
                                         : 
                                         editingIndex === index ?
                                             <button className="bg-red-600 text-white p-2 rounded-lg mr-2" onClick={() => handleCancel()} >Cancelar</button>
                                         :
                                             null
                                     }
+                                    <button className="bg-red-600 text-white p-2 rounded-lg mr-2" onClick={() => handleDelete(index)} >Eliminar</button>
                                 </td>
                             </tr>
                         ))}
@@ -176,7 +137,6 @@ const DescriptivePage = () => {
             </div>
         </>
     );
-
 }
 
 export default DescriptivePage;
