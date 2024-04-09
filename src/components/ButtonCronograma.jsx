@@ -96,14 +96,16 @@ export default function ButtonCronogramaGenerator() {
                 let end_m = endD.getMonth() + 1;
                 let end_d = endD.getDate();
 
-                let total_days = end_d - start_d; 
+                // Obtener los días de la fila de sección
+                const differenceTime = endD.getTime() - startD.getTime();
+                const daysBetweenDate = Math.round(differenceTime / (1000 * 3600 * 24)) + 1;
 
                 // Agregar la fila de sección
                 html += `
                                 <tr>
                                     <td style="${sectionStyle}">${section.title}</td>
                                     <td style="${tdStyle} ${contentStyle}">${section.contents[0].startDate}</td>
-                                    <td style="${tdStyle} ${contentStyle}">${total_days}</td>
+                                    <td style="${tdStyle} ${contentStyle}">${daysBetweenDate}</td>
                                     <td style="${tdStyle} ${contentStyle}">${section.contents[0].endDate}</td>                                    
 
                                     <td style="${tdStyle} ${monthDisplay(1)} ${(start_m == 1 && start_d >= 1  && start_d <= 7  ) || (end_m == 1 && end_d >=1  && end_d <= 7  )  || ((start_m < 1 && end_m > 1) || start_m <  1 && end_m   >=  1   && end_d    > 7 )                                                                                                 ? marcadoStyle : normalStyle}">&nbsp;</td>
@@ -169,13 +171,15 @@ export default function ButtonCronogramaGenerator() {
                         let end_m = endD.getMonth() + 1;
                         let end_d = endD.getDate();
 
-                        let total_days = end_d - start_d; 
+                        // Obtener los días de la fila de contenidos
+                        const differenceTime = endD.getTime() - startD.getTime();
+                        const daysBetweenDate = Math.round(differenceTime / (1000 * 3600 * 24)) + 1;
                 
                         html += `
                                 <tr>
                                     <td style="${tdStyle} ${videoConfStyle}">${content.content}</td>
                                     <td style="${tdStyle} ${contentStyle}">${content.startDate}</td>
-                                    <td style="${tdStyle} ${contentStyle}">${total_days}</td>
+                                    <td style="${tdStyle} ${contentStyle}">${daysBetweenDate}</td>
                                     <td style="${tdStyle} ${contentStyle}">${content.endDate}</td>                                    
                                     <td style="${tdStyle} ${monthDisplay(1)} ${(start_m == 1 && start_d >= 1  && start_d <= 7  ) || (end_m == 1 && end_d >=1  && end_d <= 7  )  || ((start_m < 1 && end_m > 1) || start_m <  1 && end_m   >=  1   && end_d    > 7 )                                                                                                 ? marcadoStyle : normalStyle}">&nbsp;</td>
                                     <td style="${tdStyle} ${monthDisplay(1)} ${(start_m == 1 && start_d >= 8  && start_d <= 14 ) || (end_m == 1 && end_d >=8  && end_d <= 14 )  || ((start_m < 1 && end_m > 1) || start_m == 1 && end_m   >   1   && start_d  < 14  || start_m == 1 && start_d <  7 && end_d > 14   || start_m < 1 && end_m == 1 && end_d > 14 || start_m == 1 && start_d <= 8 && end_d > 14 )     ? marcadoStyle : normalStyle}">&nbsp;</td>
@@ -239,13 +243,15 @@ export default function ButtonCronogramaGenerator() {
                         let end_m = endD.getMonth() + 1;
                         let end_d = endD.getDate();
 
-                        let total_days = end_d - start_d; 
+                        // Obtener los días de la fila de contenidos
+                        const differenceTime = endD.getTime() - startD.getTime();
+                        const daysBetweenDate = Math.round(differenceTime / (1000 * 3600 * 24)) + 1; 
 
                         html += `
                                 <tr>
                                     <td style="${tdStyle} ${retoStyle}">${content.content}</td>
                                     <td style="${tdStyle} ${contentStyle}">${content.startDate}</td>
-                                    <td style="${tdStyle} ${contentStyle}">${total_days}</td>
+                                    <td style="${tdStyle} ${contentStyle}">${daysBetweenDate}</td>
                                     <td style="${tdStyle} ${contentStyle}">${content.endDate}</td>
                                     <td style="${tdStyle} ${monthDisplay(1)} ${(start_m == 1 && start_d >= 1  && start_d <= 7  ) || (end_m == 1 && end_d >=1  && end_d <= 7  )  || ((start_m < 1 && end_m > 1) || start_m <  1 && end_m   >=  1   && end_d    > 7 )                                                                                                 ? marcadoStyle : normalStyle}">&nbsp;</td>
                                     <td style="${tdStyle} ${monthDisplay(1)} ${(start_m == 1 && start_d >= 8  && start_d <= 14 ) || (end_m == 1 && end_d >=8  && end_d <= 14 )  || ((start_m < 1 && end_m > 1) || start_m == 1 && end_m   >   1   && start_d  < 14  || start_m == 1 && start_d <  7 && end_d > 14   || start_m < 1 && end_m == 1 && end_d > 14 || start_m == 1 && start_d <= 8 && end_d > 14 )     ? marcadoStyle : normalStyle}">&nbsp;</td>
@@ -308,23 +314,15 @@ export default function ButtonCronogramaGenerator() {
                         let end_m = endD.getMonth() + 1;
                         let end_d = endD.getDate();
 
-                        const total_days = function (startDate, endDate) {
-                            let startD = new Date(startDate);
-                            let start_m = startD.getMonth() + 1;
-                            let start_d = startD.getDate();
-
-                            let endD = new Date(endDate);
-                            let end_m = endD.getMonth() + 1;
-                            let end_d = endD.getDate();
-
-                            return (end_d - start_d) + 1;
-                       };                         
+                        // Obtener los días de la fila de contenidos
+                        const differenceTime = endD.getTime() - startD.getTime();
+                        const daysBetweenDate = Math.round(differenceTime / (1000 * 3600 * 24)) + 1;                   
 
                         html += `
                                 <tr>
                                     <td style="${tdStyle} ${foroStyle}">${content.content}</td>
                                     <td style="${tdStyle} ${contentStyle}">${content.startDate}</td>
-                                    <td style="${tdStyle} ${contentStyle}">${total_days(content.startDate, content.endDate)}</td>
+                                    <td style="${tdStyle} ${contentStyle}">${daysBetweenDate}</td>
                                     <td style="${tdStyle} ${contentStyle}">${content.endDate}</td>
                                     <td style="${tdStyle} ${monthDisplay(1)} ${(start_m == 1 && start_d >= 1  && start_d <= 7  ) || (end_m == 1 && end_d >=1  && end_d <= 7  )  || ((start_m < 1 && end_m > 1) || start_m <  1 && end_m   >=  1   && end_d    > 7 )                                                                                                 ? marcadoStyle : normalStyle}">&nbsp;</td>
                                     <td style="${tdStyle} ${monthDisplay(1)} ${(start_m == 1 && start_d >= 8  && start_d <= 14 ) || (end_m == 1 && end_d >=8  && end_d <= 14 )  || ((start_m < 1 && end_m > 1) || start_m == 1 && end_m   >   1   && start_d  < 14  || start_m == 1 && start_d <  7 && end_d > 14   || start_m < 1 && end_m == 1 && end_d > 14 || start_m == 1 && start_d <= 8 && end_d > 14 )     ? marcadoStyle : normalStyle}">&nbsp;</td>
@@ -387,13 +385,15 @@ export default function ButtonCronogramaGenerator() {
                         let end_m = endD.getMonth() + 1;
                         let end_d = endD.getDate();
 
-                        let total_days = end_d - start_d; 
+                        // Obtener los días de la fila de contenidos
+                        const differenceTime = endD.getTime() - startD.getTime();
+                        const daysBetweenDate = Math.round(differenceTime / (1000 * 3600 * 24)) + 1; 
 
                         html += `
                                 <tr>
                                     <td style="${tdStyle} ${examenStyle}">${content.content}</td>
                                     <td style="${tdStyle} ${contentStyle}">${content.startDate}</td>
-                                    <td style="${tdStyle} ${contentStyle}">${total_days}</td>
+                                    <td style="${tdStyle} ${contentStyle}">${daysBetweenDate}</td>
                                     <td style="${tdStyle} ${contentStyle}">${content.endDate}</td>
                                     <td style="${tdStyle} ${monthDisplay(1)} ${(start_m == 1 && start_d >= 1  && start_d <= 7  ) || (end_m == 1 && end_d >=1  && end_d <= 7  )  || ((start_m < 1 && end_m > 1) || start_m <  1 && end_m   >=  1   && end_d    > 7 )                                                                                                 ? marcadoStyle : normalStyle}">&nbsp;</td>
                                     <td style="${tdStyle} ${monthDisplay(1)} ${(start_m == 1 && start_d >= 8  && start_d <= 14 ) || (end_m == 1 && end_d >=8  && end_d <= 14 )  || ((start_m < 1 && end_m > 1) || start_m == 1 && end_m   >   1   && start_d  < 14  || start_m == 1 && start_d <  7 && end_d > 14   || start_m < 1 && end_m == 1 && end_d > 14 || start_m == 1 && start_d <= 8 && end_d > 14 )     ? marcadoStyle : normalStyle}">&nbsp;</td>
