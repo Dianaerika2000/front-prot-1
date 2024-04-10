@@ -34,7 +34,7 @@ export default function ButtonGenerator() {
         if (content.typeContent == 1 && contentIndex == 0) {
           html += `<tr>
                       <td rowspan="${countLenghtNot6}" style="text-align: center;">${section.hours}</td>
-                      <td><a href="${content.linkContent}" style="text-decoration: none; color: #1948a0; font-weight: 600;">${content.content}</a></td> 
+                      <td><a href="${content.linkContent}" style="text-decoration: none; color: #1948a0; font-weight: 600; text-align: center;">${content.content}</a></td> 
                       <td>${content.activity}</td> 
                       <td rowspan="${countTypeContent1}" style="text-align: center;">${content.startDate}</td> 
                       <td rowspan="${countTypeContent1}" style="text-align: center;">${content.endDate}</td>
