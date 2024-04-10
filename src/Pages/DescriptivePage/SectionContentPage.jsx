@@ -268,8 +268,8 @@ export default function SectionContentPage() {
               <tr key={index}>
                 <td className="border px-4 py-2">{content.content}</td>
                 <td className="border px-4 py-2">{content.activity}</td>
-                <td className="border px-4 py-2">{new Date(content.startDate).toLocaleDateString()}</td>
-                <td className="border px-4 py-2">{new Date(content.endDate).toLocaleDateString()}</td>
+                <td className="border px-4 py-2">{content.startDate}</td>
+                <td className="border px-4 py-2">{content.endDate}</td>
                 <td className="border px-4 py-2">
                   <div className="flex items-center justify-center">
                     <button
