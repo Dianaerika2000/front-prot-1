@@ -15,6 +15,7 @@ export default function SectionContentPage() {
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
   const [contentToEdit, setContentToEdit] = useState(null);
+  const [isPartialContent, setIsPartialContent] = useState(false);
 
   const addContentToSection = useSectionStore((state) => state.addContentToSection);
   const updateContentInSection = useSectionStore((state) => state.updateContentInSection);
@@ -55,6 +56,7 @@ export default function SectionContentPage() {
   const handleChangeTypeContent = (e) => {
     const selectedTypeContent = e.target.value;
     setTypeContent(selectedTypeContent);
+    setIsPartialContent(selectedTypeContent === '6');
   };
 
   // Función para cargar los datos del contenido a editar en el formulario
@@ -95,55 +97,83 @@ export default function SectionContentPage() {
 
         {message && <p className="text-green-500 mb-2">{message}</p>}
         <form onSubmit={handleSubmitContent} className="mt-2">
-          <div className="flex flex-wrap -mx-2">
-            <div className="w-full md:w-1/2 px-2 mb-4">
-              <label className="block mb-2">
-                Fecha de Inicio:
-                <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} className="w-full p-2 border rounded-md" />
-              </label>
+        {isPartialContent ? (
+          <>
+            <div className="flex flex-wrap -mx-2">
+              {/* Renderiza aquí los campos específicos para el tipo de contenido Parcial */}
+              <div className="w-full md:w-1/2 px-2 mb-4">
+                <label className="block mb-2 text-start">
+                  Nombre:
+                  <input type="text" value={startDate} onChange={(e) => setStartDate(e.target.value)} className="w-full p-2 border rounded-md" placeholder="1er Parcial."/>
+                </label>
+              </div>
+              <div className="w-full md:w-1/2 px-2 mb-4">
+                <label className="block mb-2 text-start">
+                  Fecha:
+                  <input type="text" value={endDate} onChange={(e) => setEndDate(e.target.value)} className="w-full p-2 border rounded-md" placeholder="7/06/23 - 19:00 pm"/>
+                </label>
+              </div>
+              <div className="w-full px-2 mb-4">
+                <label className="block mb-2 text-start">
+                  Contenido:
+                  <input type="text" placeholder="Una vez terminadas las unidades I y II podrá ingresar al primer parcial, caso contrario el parcial no estará habilitado." value={content} onChange={(e) => setContent(e.target.value)} className="w-full p-2 border rounded-md" />
+                </label>
+              </div>
             </div>
-            <div className="w-full md:w-1/2 px-2 mb-4">
-              <label className="block mb-2">
-                Fecha de Fin:
-                <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} className="w-full p-2 border rounded-md" />
-              </label>
+          </>
+          ) : (
+          <>
+            <div className="flex flex-wrap -mx-2">
+              <div className="w-full md:w-1/2 px-2 mb-4">
+                <label className="block mb-2">
+                  Fecha de Inicio:
+                  <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} className="w-full p-2 border rounded-md" />
+                </label>
+              </div>
+              <div className="w-full md:w-1/2 px-2 mb-4">
+                <label className="block mb-2">
+                  Fecha de Fin:
+                  <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} className="w-full p-2 border rounded-md" />
+                </label>
+              </div>
             </div>
-          </div>
-          <div className="flex flex-wrap -mx-2">
-            <div className="w-full px-2 mb-4">
-              <label className="block mb-2">
-                Contenido:
-                <input type="text" placeholder="Lección 1.1: Conceptos de la P.O.O." value={content} onChange={(e) => setContent(e.target.value)} className="w-full p-2 border rounded-md" />
-              </label>
+            <div className="flex flex-wrap -mx-2">
+              <div className="w-full px-2 mb-4">
+                <label className="block mb-2">
+                  Contenido:
+                  <input type="text" placeholder="Lección 1.1: Conceptos de la P.O.O." value={content} onChange={(e) => setContent(e.target.value)} className="w-full p-2 border rounded-md" />
+                </label>
+              </div>
+              <div className="w-full px-2 mb-4">
+                <label className="block mb-2">
+                  Actividad:
+                  <input type="text" placeholder="Realice lectura comprensiva visualizando los 2 videos, 4 esquemas, 2 imagen y 1 tabla. Al finalizar la lección deberá de responder 4 preguntas." value={activity} onChange={(e) => setActivity(e.target.value)} className="w-full p-2 border rounded-md" />
+                </label>
+              </div>
             </div>
-            <div className="w-full px-2 mb-4">
-              <label className="block mb-2">
-                Actividad:
-                <input type="text" placeholder="Realice lectura comprensiva visualizando los 2 videos, 4 esquemas, 2 imagen y 1 tabla. Al finalizar la lección deberá de responder 4 preguntas." value={activity} onChange={(e) => setActivity(e.target.value)} className="w-full p-2 border rounded-md" />
-              </label>
+            <div className="flex flex-wrap -mx-2">
+              <div className="w-full md:w-1/2 px-2 mb-4">
+                <label className="block mb-2">
+                  Link del Contenido:
+                  <input type="text" placeholder="https://virtual.uagrm.edu.bo/aula/mod/lesson/view.php?id=XXXX" value={linkContent} onChange={(e) => setLinkContent(e.target.value)} className="w-full p-2 border rounded-md" />
+                </label>
+              </div>
+              <div className="w-full md:w-1/2 px-2 mb-4">
+                <label className="block mb-2">
+                  Tipo de Contenido:
+                  <select value={typeContent} onChange={handleChangeTypeContent} className="w-full p-2 border rounded-md">
+                    <option value="1">Lección</option>
+                    <option value="2">Autoevaluación</option>
+                    <option value="3">Videoconferencia</option>
+                    <option value="4">Reto</option>
+                    <option value="5">Foro</option>
+                    <option value="6">Parcial</option>
+                  </select>
+                </label>
+              </div>
             </div>
-          </div>
-          <div className="flex flex-wrap -mx-2">
-            <div className="w-full md:w-1/2 px-2 mb-4">
-              <label className="block mb-2">
-                Link del Contenido:
-                <input type="text" placeholder="https://virtual.uagrm.edu.bo/aula/mod/lesson/view.php?id=XXXX" value={linkContent} onChange={(e) => setLinkContent(e.target.value)} className="w-full p-2 border rounded-md" />
-              </label>
-            </div>
-            <div className="w-full md:w-1/2 px-2 mb-4">
-              <label className="block mb-2">
-                Tipo de Contenido:
-                <select value={typeContent} onChange={handleChangeTypeContent} className="w-full p-2 border rounded-md">
-                  <option value="1">Lección</option>
-                  <option value="2">Autoevaluación</option>
-                  <option value="3">Videoconferencia</option>
-                  <option value="4">Reto</option>
-                  <option value="5">Foro</option>
-                  <option value="6">Parcial</option>
-                </select>
-              </label>
-            </div>
-          </div>
+          </>
+        )}
           <div className="flex justify-end mb-4">
             {error && <p className="text-red-500 mb-2">{error}</p>}
             
