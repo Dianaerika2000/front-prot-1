@@ -50,14 +50,17 @@ export default function DatePeriodComponent() {
     <div className="bg-white p-4 rounded-md shadow-md w-1/4">
       <h2 className="text-xl font-bold mb-4">Fechas de Período Académico</h2>
       {startDatePeriod && endDatePeriod && (
-        <div className="mt-4 bg-blue-200 p-4 rounded-md">
+        <div className="mt-4 bg-blue-200 p-2 rounded-md">
           <div className="flex justify-end">
-            <button onClick={handleEditPeriod} className="bg-yellow-500 text-white p-2 rounded-md text-end">
+            <div>
+              <p className="text-left">Fecha de Inicio: {new Date(startDatePeriod).toLocaleDateString('es-ES')}</p>
+              <p className="text-left">Fecha de Fin: {new Date(endDatePeriod).toLocaleDateString('es-ES')}</p>
+            </div>
+            <button onClick={handleEditPeriod} className="bg-yellow-500 text-white p-1 rounded-lg text-end size-8">
               <i className="bi bi-pencil-square"></i>
             </button>
           </div>
-          <p className="text-left">Fecha de Inicio: {new Date(startDatePeriod).toLocaleDateString('es-ES')}</p>
-          <p className="text-left">Fecha de Fin: {new Date(endDatePeriod).toLocaleDateString('es-ES')}</p>
+
         </div>
       )}
       <form onSubmit={handleSubmitPeriod} className="text-start mt-4">
@@ -74,7 +77,7 @@ export default function DatePeriodComponent() {
         ) : (
           <button type="submit" className="bg-blue-500 text-white p-2 rounded-md">Registrar</button>
         )}
-        
+
       </form>
       {message && <p className="text-green-500 mt-2">{message}</p>}
     </div>

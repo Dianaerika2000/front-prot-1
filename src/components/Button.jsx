@@ -17,6 +17,7 @@ export default function ButtonGenerator() {
     // Iterar sobre cada sección y contenido para agregarlos a la tabla
     sections.forEach((section, index) => {
       const countTypeContent1 = section.contents.filter(item => item.typeContent === "1").length;
+      const countLenghtNot6= section.contents.filter(item => item.typeContent !== "6").length;
 
       html += `<tr> 
         <th colspan="5" style="background-color: #1948a0; color: white;">${section.title}</th> 
@@ -32,11 +33,19 @@ export default function ButtonGenerator() {
       section.contents.forEach((content, contentIndex) => {
         if (content.typeContent == 1 && contentIndex == 0) {
           html += `<tr>
-                      <td rowspan="${section.contents.length}" style="text-align: center;">${section.hours}</td>
+                      <td rowspan="${countLenghtNot6}" style="text-align: center;">${section.hours}</td>
                       <td><a href="${content.linkContent}" style="text-decoration: none; color: #1948a0; font-weight: 600;">${content.content}</a></td> 
                       <td>${content.activity}</td> 
                       <td rowspan="${countTypeContent1}" style="text-align: center;">${content.startDate}</td> 
                       <td rowspan="${countTypeContent1}" style="text-align: center;">${content.endDate}</td>
+                    </tr>`;
+        }
+
+        if (content.typeContent == 6 && contentIndex != 0) {
+          html += `<tr>
+                      <td style="text-align: center; background-color: #FF0000; color: white;">${content.content}</td> 
+                      <td colspan="2" style="text-align: center; background-color: #FF0000; color: white;">${content.activity}</td> 
+                      <td colspan="2" style="text-align: center; background-color: #FF0000; color: white;">${content.dateTest}</td> 
                     </tr>`;
         }
 
