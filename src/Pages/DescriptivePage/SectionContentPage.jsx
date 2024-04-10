@@ -111,7 +111,6 @@ export default function SectionContentPage() {
     setContentToEdit(null);
   };
 
-
   return (
     <>
       <div className="bg-white p-4 rounded-md shadow-md">
@@ -212,47 +211,52 @@ export default function SectionContentPage() {
           </div>
         </form>
       </div>
-      {/* Tabla para contenidos tipo: parcial */}
-      <div className="bg-white p-4 rounded-md shadow-md mt-6">
-        <h3 className="text-lg font-semibold mb-4">Parciales</h3>
-        <table className="w-full border text-start">
-          <thead>
-            <tr className="bg-gray-200">
-              <th className="border px-4 py-2">Contenido</th>
-              <th className="border px-4 py-2">Actividad</th>
-              <th className="border px-4 py-2">Fecha - Hora</th>
-              <th className="border px-4 py-2">Opciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {sectionFromStore.contents?.filter(content => content.typeContent === '6').map((content, index) => (
-              <tr key={index}>
-                <td className="border px-4 py-2">{content.content}</td>
-                <td className="border px-4 py-2">{content.activity}</td>
-                <td className="border px-4 py-2">{content.dateTest}</td>
-                <td className="border px-4 py-2">
-                  <div className="flex items-center justify-center">
-                    <button
-                      className="bg-yellow-500 text-dark p-2 rounded-lg mr-2 text-white"
-                      onClick={() => handleEditContent(index)}
-                    >
-                      <i className="bi bi-pencil-square"></i>
-                    </button>
-                    <button
-                      className="bg-red-500 text-white p-2 rounded-lg"
-                      onClick={() => handleDeleteContent(index)}
-                    >
-                      <i className="bi bi-trash3-fill"></i>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      {sectionFromStore.contents?.filter(content => content.typeContent === '6').length > 0 ?
+        (
+          <div className="bg-white p-4 rounded-md shadow-md mt-6">
+            <h3 className="text-lg font-semibold mb-4">Parciales</h3>
+            <table className="w-full border text-start">
+              <thead>
+                <tr className="bg-gray-200">
+                  <th className="border px-4 py-2">Contenido</th>
+                  <th className="border px-4 py-2">Actividad</th>
+                  <th className="border px-4 py-2">Fecha - Hora</th>
+                  <th className="border px-4 py-2">Opciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                {sectionFromStore.contents?.filter(content => content.typeContent === '6').map((content, index) => (
+                  <tr key={index}>
+                    <td className="border px-4 py-2">{content.content}</td>
+                    <td className="border px-4 py-2">{content.activity}</td>
+                    <td className="border px-4 py-2">{content.dateTest}</td>
+                    <td className="border px-4 py-2">
+                      <div className="flex items-center justify-center">
+                        <button
+                          className="bg-yellow-500 text-dark p-2 rounded-lg mr-2 text-white"
+                          onClick={() => handleEditContent(index)}
+                        >
+                          <i className="bi bi-pencil-square"></i>
+                        </button>
+                        <button
+                          className="bg-red-500 text-white p-2 rounded-lg"
+                          onClick={() => handleDeleteContent(index)}
+                        >
+                          <i className="bi bi-trash3-fill"></i>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>)
+        :
+        (null)
+      }
       {/* Tabla para contenidos tipo: lecciones, videoconferencias, foros, retos, Autoevaluación */}
       <div className="bg-white p-4 rounded-md shadow-md mt-6">
+        <h3 className="text-lg font-semibold mb-4">Contenidos</h3>
         <table className="w-full border text-start">
           <thead>
             <tr className="bg-gray-200">
@@ -268,8 +272,8 @@ export default function SectionContentPage() {
               <tr key={index}>
                 <td className="border px-4 py-2">{content.content}</td>
                 <td className="border px-4 py-2">{content.activity}</td>
-                <td className="border px-4 py-2">{new Date(content.startDate).toLocaleDateString()}</td>
-                <td className="border px-4 py-2">{new Date(content.endDate).toLocaleDateString()}</td>
+                <td className="border px-4 py-2">{content.startDate}</td>
+                <td className="border px-4 py-2">{content.endDate}</td>
                 <td className="border px-4 py-2">
                   <div className="flex items-center justify-center">
                     <button
