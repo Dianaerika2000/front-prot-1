@@ -51,12 +51,12 @@ export default function DatePeriodComponent() {
       <h2 className="text-xl font-bold mb-4">Fechas de Período Académico</h2>
       {startDatePeriod && endDatePeriod && (
         <div className="mt-4 bg-blue-200 p-2 rounded-md">
-          <div className="flex justify-end">
+          <div className="flex space-x-8">
             <div>
               <p className="text-left">Fecha de Inicio: {new Date(startDatePeriod).toLocaleDateString('es-ES')}</p>
               <p className="text-left">Fecha de Fin: {new Date(endDatePeriod).toLocaleDateString('es-ES')}</p>
             </div>
-            <button onClick={handleEditPeriod} className="bg-yellow-500 text-white p-1 rounded-lg text-end size-8">
+            <button onClick={handleEditPeriod} className="bg-yellow-500 text-white rounded-lg size-6">
               <i className="bi bi-pencil-square"></i>
             </button>
           </div>
