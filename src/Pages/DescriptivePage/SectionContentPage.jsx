@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import useSectionStore from "../../hook/useStore";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
@@ -47,11 +47,17 @@ export default function SectionContentPage() {
         return;
       }
 
+      const datePart = dateTest.split(" - ")[0];
+      const [day, month, year] = datePart.split("/");
+      const dateObject = new Date(`${year}-${month}-${day}`);
+      const startDate = dateObject.toISOString().split("T")[0];
+      const endDate = startDate;
+
       if (contentToEdit) {
-        updateContentInSection(parseInt(id), contentToEdit.index, { content, activity, typeContent, dateTest });
+        updateContentInSection(parseInt(id), contentToEdit.index, { content, activity, typeContent, dateTest, startDate, endDate });
         setMessage('El contenido fue actualizado exitosamente');
       } else {
-        addContentToSection(parseInt(id), { content, activity, typeContent, dateTest });
+        addContentToSection(parseInt(id), { content, activity, typeContent, dateTest, startDate, endDate });
         setMessage('El contenido fue registrado exitosamente');
       }
     }
