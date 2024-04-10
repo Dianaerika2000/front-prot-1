@@ -53,14 +53,13 @@ export default function DatePeriodComponent() {
         <div className="mt-4 bg-blue-200 p-2 rounded-md">
           <div className="flex space-x-8">
             <div>
-              <p className="text-left">Fecha de Inicio: {new Date(startDatePeriod).toLocaleDateString('es-ES')}</p>
-              <p className="text-left">Fecha de Fin: {new Date(endDatePeriod).toLocaleDateString('es-ES')}</p>
+              <p className="text-left">Fecha de Inicio: {startDatePeriod}</p>
+              <p className="text-left">Fecha de Fin: {endDatePeriod}</p>
             </div>
             <button onClick={handleEditPeriod} className="bg-yellow-500 text-white rounded-lg size-6">
               <i className="bi bi-pencil-square"></i>
             </button>
           </div>
-
         </div>
       )}
       <form onSubmit={handleSubmitPeriod} className="text-start mt-4">
