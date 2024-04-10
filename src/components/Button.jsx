@@ -16,8 +16,8 @@ export default function ButtonGenerator() {
 
     // Iterar sobre cada sección y contenido para agregarlos a la tabla
     sections.forEach((section, index) => {
-      const countTypeContent1 = section.contents.filter(item => item.typeContent === "1").length;
-      const countLenghtNot6= section.contents.filter(item => item.typeContent !== "6").length;
+      const countTypeContent1 = section.contents?.filter(item => item.typeContent === "1").length;
+      const countLenghtNot6= section.contents?.filter(item => item.typeContent !== "6").length;
 
       html += `<tr> 
         <th colspan="5" style="background-color: #1948a0; color: white;">${section.title}</th> 
@@ -30,7 +30,7 @@ export default function ButtonGenerator() {
         <th>Fecha de Finalización</th> 
       </tr>`
 
-      section.contents.forEach((content, contentIndex) => {
+      section.contents?.forEach((content, contentIndex) => {
         if (content.typeContent == 1 && contentIndex == 0) {
           html += `<tr>
                       <td rowspan="${countLenghtNot6}" style="text-align: center;">${section.hours}</td>
