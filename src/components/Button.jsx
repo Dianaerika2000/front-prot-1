@@ -20,21 +20,21 @@ export default function ButtonGenerator() {
       const countLenghtNot6= section.contents?.filter(item => item.typeContent !== "6").length;
 
       html += `<tr> 
-        <th colspan="5" style="background-color: #1948a0; color: white;">${section.title}</th> 
+        <th colspan="5" style="background-color: #1948a0; color: white; text-align: center;">${section.title}</th> 
       </tr> 
       <tr> 
-        <th>Horas Académicas</th> 
-        <th>Contenido</th> 
-        <th>Actividad</th> 
-        <th>Fecha Inicio</th> 
-        <th>Fecha de Finalización</th> 
+        <th style="text-align: center; background: rgba(25, 72, 160, 0.1);">Horas Académicas</th> 
+        <th style="text-align: center; background: rgba(25, 72, 160, 0.1);">Contenido</th> 
+        <th style="text-align: center; background: rgba(25, 72, 160, 0.1);">Actividad</th> 
+        <th style="text-align: center; background: rgba(25, 72, 160, 0.1);">Fecha Inicio</th> 
+        <th style="text-align: center; background: rgba(25, 72, 160, 0.1);">Fecha de Finalización</th> 
       </tr>`
 
       section.contents?.forEach((content, contentIndex) => {
         if (content.typeContent == 1 && contentIndex == 0) {
           html += `<tr>
                       <td rowspan="${countLenghtNot6}" style="text-align: center;">${section.hours}</td>
-                      <td><a href="${content.linkContent}" style="text-decoration: none; color: #1948a0; font-weight: 600; text-align: center;">${content.content}</a></td> 
+                      <td><a href="${content.linkContent}" style="text-decoration: none; color: #1948a0; font-weight: 600;">${content.content}</a></td> 
                       <td>${content.activity}</td> 
                       <td rowspan="${countTypeContent1}" style="text-align: center;">${content.startDate}</td> 
                       <td rowspan="${countTypeContent1}" style="text-align: center;">${content.endDate}</td>
