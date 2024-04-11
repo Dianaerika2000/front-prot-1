@@ -9,7 +9,7 @@ export default function ButtonGenerator() {
         <head> 
           <meta charset="UTF-8" /> 
           <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
-          <title>Generador-HTML</title> 
+          <title>Carta Descriptiva</title> 
         </head> 
         <body> 
           <table border="1" cellpadding="5" cellspacing="0" style="font-family: Calibri; border-width: 1px; border-color: #C0C2CD;">`
@@ -20,14 +20,14 @@ export default function ButtonGenerator() {
       const countLenghtNot6= section.contents?.filter(item => item.typeContent !== "6").length;
 
       html += `<tr> 
-        <th colspan="5" style="background-color: #1948a0; color: white;">${section.title}</th> 
+        <th colspan="5" style="background-color: #1948a0; color: white; text-align: center;">${section.title}</th> 
       </tr> 
       <tr> 
-        <th>Horas Académicas</th> 
-        <th>Contenido</th> 
-        <th>Actividad</th> 
-        <th>Fecha Inicio</th> 
-        <th>Fecha de Finalización</th> 
+        <th style="text-align: center; background: rgba(25, 72, 160, 0.1);">Horas Académicas</th> 
+        <th style="text-align: center; background: rgba(25, 72, 160, 0.1);">Contenido</th> 
+        <th style="text-align: center; background: rgba(25, 72, 160, 0.1);">Actividad</th> 
+        <th style="text-align: center; background: rgba(25, 72, 160, 0.1);">Fecha Inicio</th> 
+        <th style="text-align: center; background: rgba(25, 72, 160, 0.1);">Fecha de Finalización</th> 
       </tr>`
 
       section.contents?.forEach((content, contentIndex) => {
