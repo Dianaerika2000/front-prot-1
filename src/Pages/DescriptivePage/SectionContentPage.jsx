@@ -122,7 +122,6 @@ export default function SectionContentPage() {
     }
   };
 
-
   return (
     <>
       <div className="bg-white p-4 rounded-md shadow-md">
@@ -266,6 +265,7 @@ export default function SectionContentPage() {
       </div>
       {/* Tabla para contenidos tipo: lecciones, videoconferencias, foros, retos, Autoevaluación */}
       <div className="bg-white p-4 rounded-md shadow-md mt-6">
+        <h3 className="text-lg font-semibold mb-4">Contenidos</h3>
         <table className="w-full border text-start">
           <thead>
             <tr className="bg-gray-200">
