@@ -3,7 +3,6 @@ import useSectionStore from "../../hook/useStore";
 import { Link } from "react-router-dom";
 import ButtonGenerator from "../../components/Button";
 import ButtonCronogramaGenerator from "../../components/ButtonCronograma";
-import DatePeriodComponent from "../../components/DateForm";
 
 const DescriptivePage = () => {
     let [titleSection, setTitleSection] = useState('');
@@ -71,9 +70,9 @@ const DescriptivePage = () => {
     }
 
     return (
-        <>
+        <div className="max-w-screen-xl mx-auto py-8">
             <div className="flex flex-wrap space-x-10">
-                <div className="bg-white p-4 rounded-md shadow-md w-2/3 text-left">
+                <div className="bg-white p-4 rounded-md shadow-md w-full text-left">
                     <h2 className="text-xl font-bold mb-4">Formulario Carta Descriptiva</h2>
                     {message && <p className="text-green-500 mb-2">{message}</p>}
                     <form onSubmit={handleSubmit}>
@@ -93,7 +92,6 @@ const DescriptivePage = () => {
                         }
                     </form>
                 </div>
-                <DatePeriodComponent/>
             </div>
 
             <div className="bg-white p-4 rounded-md shadow-md mt-6">
@@ -135,7 +133,7 @@ const DescriptivePage = () => {
                     </tbody>
                 </table>
             </div>
-        </>
+        </div>
     );
 }
 
