@@ -91,7 +91,6 @@ export default function SectionContentPage() {
   // Función para cargar los datos del contenido a editar en el formulario
   const handleEditContent = (index) => {
     const contentData = sectionFromStore.contents[index];
-    console.log('contentData', contentData);
     setContentToEdit({ ...contentData, index });
     setStartDate(contentData.startDate);
     setEndDate(contentData.endDate);
