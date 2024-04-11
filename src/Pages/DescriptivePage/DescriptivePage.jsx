@@ -44,7 +44,7 @@ const DescriptivePage = () => {
         } else {
             // Add new section to store
             addSection(newSection);
-            setMessage('La sección fue registrada exitosamente');
+            setMessage('La unidad fue registrada exitosamente');
         }
 
         setTimeout(() => {
@@ -78,7 +78,7 @@ const DescriptivePage = () => {
                     {message && <p className="text-green-500 mb-2">{message}</p>}
                     <form onSubmit={handleSubmit}>
                         <label className="block mb-2">
-                            Título de la Sección:
+                            Título de la Unidad:
                             <input type="text" placeholder="Unidad 1: Conceptos y características de la P.O.O." value={titleSection} onChange={(e) => setTitleSection(e.target.value)} className="w-full p-2 border rounded-md" />
                         </label>
                         <label className="block mb-2">
@@ -87,7 +87,7 @@ const DescriptivePage = () => {
                         </label>
                         {error && <p className="text-red-500 mb-2">{error}</p>}
                         { editingIndex !== null ?
-                            <button type="submit" className="bg-amber-400 text-white p-2 rounded-md">Editar</button>
+                            <button type="submit" className="bg-blue-500 text-white p-2 rounded-md">Actualizar</button>
                             :
                             <button type="submit" className="bg-blue-500 text-white p-2 rounded-md">Registrar</button>
                         }
@@ -106,7 +106,7 @@ const DescriptivePage = () => {
                 <table className="w-full border mt-6">
                     <thead>
                         <tr className="bg-gray-200">
-                            <th className="border px-4 py-2">Título de la Sección</th>
+                            <th className="border px-4 py-2">Título de la Unidad</th>
                             <th className="border px-4 py-2">Horas Académicas</th>
                             <th className="border px-4 py-2">Acciones</th>
                         </tr>
