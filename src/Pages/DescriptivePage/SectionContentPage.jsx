@@ -76,6 +76,10 @@ export default function SectionContentPage() {
     setContentToEdit(null);
     setTypeContent('1');
     setDateTest('');
+
+    if (isPartialContent) {
+      setIsPartialContent(false);
+    }
   };
 
   const handleChangeTypeContent = (e) => {
@@ -87,6 +91,7 @@ export default function SectionContentPage() {
   // Función para cargar los datos del contenido a editar en el formulario
   const handleEditContent = (index) => {
     const contentData = sectionFromStore.contents[index];
+    console.log('contentData', contentData);
     setContentToEdit({ ...contentData, index });
     setStartDate(contentData.startDate);
     setEndDate(contentData.endDate);
@@ -94,6 +99,8 @@ export default function SectionContentPage() {
     setActivity(contentData.activity);
     setTypeContent(contentData.typeContent);
     setLinkContent(contentData.linkContent);
+    setDateTest(contentData.dateTest);
+    setIsPartialContent(contentData.typeContent === '6');
   };
 
   const handleDeleteContent = (index) => {
@@ -109,6 +116,10 @@ export default function SectionContentPage() {
     setLinkContent('');
     setError('');
     setContentToEdit(null);
+
+    if (isPartialContent) {
+      setIsPartialContent(false);
+    }
   };
 
 
@@ -225,29 +236,31 @@ export default function SectionContentPage() {
             </tr>
           </thead>
           <tbody>
-            {sectionFromStore.contents?.filter(content => content.typeContent === '6').map((content, index) => (
-              <tr key={index}>
-                <td className="border px-4 py-2">{content.content}</td>
-                <td className="border px-4 py-2">{content.activity}</td>
-                <td className="border px-4 py-2">{content.dateTest}</td>
-                <td className="border px-4 py-2">
-                  <div className="flex items-center justify-center">
-                    <button
-                      className="bg-yellow-500 text-dark p-2 rounded-lg mr-2 text-white"
-                      onClick={() => handleEditContent(index)}
-                    >
-                      <i className="bi bi-pencil-square"></i>
-                    </button>
-                    <button
-                      className="bg-red-500 text-white p-2 rounded-lg"
-                      onClick={() => handleDeleteContent(index)}
-                    >
-                      <i className="bi bi-trash3-fill"></i>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            ))}
+            {sectionFromStore.contents
+              ?.map((content, index) => ({ ...content, index }))
+              .filter(content => content.typeContent === '6').map((content, index) => (
+                <tr key={index}>
+                  <td className="border px-4 py-2">{content.content}</td>
+                  <td className="border px-4 py-2">{content.activity}</td>
+                  <td className="border px-4 py-2">{content.dateTest}</td>
+                  <td className="border px-4 py-2">
+                    <div className="flex items-center justify-center">
+                      <button
+                        className="bg-yellow-500 text-dark p-2 rounded-lg mr-2 text-white"
+                        onClick={() => handleEditContent(content.index)}
+                      >
+                        <i className="bi bi-pencil-square"></i>
+                      </button>
+                      <button
+                        className="bg-red-500 text-white p-2 rounded-lg"
+                        onClick={() => handleDeleteContent(content.index)}
+                      >
+                        <i className="bi bi-trash3-fill"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>
