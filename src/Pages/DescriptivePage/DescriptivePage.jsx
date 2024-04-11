@@ -3,7 +3,6 @@ import useSectionStore from "../../hook/useStore";
 import { Link } from "react-router-dom";
 import ButtonGenerator from "../../components/Button";
 import ButtonCronogramaGenerator from "../../components/ButtonCronograma";
-import DatePeriodComponent from "../../components/DateForm";
 
 const DescriptivePage = () => {
     let [titleSection, setTitleSection] = useState('');
@@ -44,7 +43,7 @@ const DescriptivePage = () => {
         } else {
             // Add new section to store
             addSection(newSection);
-            setMessage('La sección fue registrada exitosamente');
+            setMessage('La unidad fue registrada exitosamente');
         }
 
         setTimeout(() => {
@@ -71,14 +70,14 @@ const DescriptivePage = () => {
     }
 
     return (
-        <>
+        <div className="max-w-screen-xl mx-auto py-8">
             <div className="flex flex-wrap space-x-10">
-                <div className="bg-white p-4 rounded-md shadow-md w-2/3 text-left">
+                <div className="bg-white p-4 rounded-md shadow-md w-full text-left">
                     <h2 className="text-xl font-bold mb-4">Formulario Carta Descriptiva</h2>
                     {message && <p className="text-green-500 mb-2">{message}</p>}
                     <form onSubmit={handleSubmit}>
                         <label className="block mb-2">
-                            Título de la Sección:
+                            Título de la Unidad:
                             <input type="text" placeholder="Unidad 1: Conceptos y características de la P.O.O." value={titleSection} onChange={(e) => setTitleSection(e.target.value)} className="w-full p-2 border rounded-md" />
                         </label>
                         <label className="block mb-2">
@@ -87,13 +86,12 @@ const DescriptivePage = () => {
                         </label>
                         {error && <p className="text-red-500 mb-2">{error}</p>}
                         { editingIndex !== null ?
-                            <button type="submit" className="bg-amber-400 text-white p-2 rounded-md">Editar</button>
+                            <button type="submit" className="bg-blue-500 text-white p-2 rounded-md">Actualizar</button>
                             :
                             <button type="submit" className="bg-blue-500 text-white p-2 rounded-md">Registrar</button>
                         }
                     </form>
                 </div>
-                <DatePeriodComponent/>
             </div>
 
             <div className="bg-white p-4 rounded-md shadow-md mt-6">
@@ -106,7 +104,7 @@ const DescriptivePage = () => {
                 <table className="w-full border mt-6">
                     <thead>
                         <tr className="bg-gray-200">
-                            <th className="border px-4 py-2">Título de la Sección</th>
+                            <th className="border px-4 py-2">Título de la Unidad</th>
                             <th className="border px-4 py-2">Horas Académicas</th>
                             <th className="border px-4 py-2">Acciones</th>
                         </tr>
@@ -135,7 +133,7 @@ const DescriptivePage = () => {
                     </tbody>
                 </table>
             </div>
-        </>
+        </div>
     );
 }
 

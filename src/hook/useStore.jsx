@@ -24,11 +24,11 @@ const useSectionStore = create(
           sections: state.sections.map((section, index) =>
             index === sectionIndex
               ? {
-                  ...section,
-                  contents: section.contents.map((item, idx) =>
-                    idx === contentIndex ? { ...item, ...updatedContent } : item
-                  ),
-                }
+                ...section,
+                contents: section.contents.map((item, idx) =>
+                  idx === contentIndex ? { ...item, ...updatedContent } : item
+                ),
+              }
               : section
           ),
         })),
@@ -37,9 +37,9 @@ const useSectionStore = create(
           sections: state.sections.map((section, index) =>
             index === sectionIndex
               ? {
-                  ...section,
-                  contents: section.contents.filter((_, idx) => idx !== contentIndex),
-                }
+                ...section,
+                contents: section.contents.filter((_, idx) => idx !== contentIndex),
+              }
               : section
           ),
         })),
@@ -56,13 +56,17 @@ const useSectionStore = create(
           endDate: endDate !== undefined ? endDate : state.endDate,
         })),
       updateSection: (index, updatedSection) =>
-        set((state) => ({
-          ...state,
-          sections: state.sections.map((section, i) =>
-            i === index ? updatedSection : section
-          ),
-        })),
-      deleteSection: (index) => 
+        set((state) => {
+          const updatedSections = state.sections.map((section, i) =>
+            i === index ? { ...section, ...updatedSection } : section
+          );
+
+          return {
+            ...state,
+            sections: updatedSections
+          };
+        }),
+      deleteSection: (index) =>
         set((state) => ({
           ...state,
           sections: state.sections.filter((_, i) => i !== index),
