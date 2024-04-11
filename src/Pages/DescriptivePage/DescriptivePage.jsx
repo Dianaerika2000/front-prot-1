@@ -87,7 +87,7 @@ const DescriptivePage = () => {
                         </label>
                         {error && <p className="text-red-500 mb-2">{error}</p>}
                         { editingIndex !== null ?
-                            <button type="submit" className="bg-amber-400 text-white p-2 rounded-md">Editar</button>
+                            <button type="submit" className="bg-blue-500 text-white p-2 rounded-md">Actualizar</button>
                             :
                             <button type="submit" className="bg-blue-500 text-white p-2 rounded-md">Registrar</button>
                         }

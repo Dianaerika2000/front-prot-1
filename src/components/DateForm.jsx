@@ -72,7 +72,7 @@ export default function DatePeriodComponent() {
           <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} className="w-full p-2 border rounded-md" />
         </label>
         {startDatePeriod && endDatePeriod && editMode ? (
-          <button type="submit" className="bg-blue-500 text-white p-2 rounded-md">Editar Período</button>
+          <button type="submit" className="bg-blue-500 text-white p-2 rounded-md">Actualizar</button>
         ) : (
           <button type="submit" className="bg-blue-500 text-white p-2 rounded-md">Registrar</button>
         )}
