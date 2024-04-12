@@ -1,6 +1,9 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 export default function NavBarMenu() {
+
+  const location = useLocation();
+
   return (
     <nav className="bg-primary w-full">
       <div className="container mx-auto flex items-center justify-between py-5">
@@ -32,12 +35,12 @@ export default function NavBarMenu() {
         <div className="hidden lg:flex flex-grow justify-center">
           <ul className="flex space-x-4 text-white">
             <li className="nav-item">
-              <Link className="text-uppercase active" to='/periodo-academico'>
-                Período Académico
+              <Link className={`text-uppercase ${location.pathname === '/periodo-academico' ? 'underline' : ''}`}  to='/periodo-academico'>
+                Periodo Academico
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="text-uppercase active" to='/carta-descriptiva'>
+              <Link className={`text-uppercase ${location.pathname === '/carta-descriptiva' ? 'underline' : ''}`} to='/carta-descriptiva'>
                 Carta Descriptiva
               </Link>
             </li>
