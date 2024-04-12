@@ -5,9 +5,11 @@ import ButtonCronogramaGenerator from './components/ButtonCronograma'
 import Navbar from './components/layout/NavBar'
 import HomePage from './Pages/HomePage'
 import DatePeriodPage from './Pages/DatePeriodPage/DatePeriodPage'
+import { useHashFragment } from "./hook/useHashFragment";
 import SectionContentPage from './Pages/DescriptivePage/SectionContentPage'
 
 function App() {
+  useHashFragment();
   return (
     <div className="App">
       <BrowserRouter>

@@ -88,7 +88,8 @@ export default function SectionContentPage() {
     setIsPartialContent(selectedTypeContent === '6');
   };
 
-  // Función para cargar los datos del contenido a editar en el formulario
+  
+  /** Función para cargar los datos del contenido a editar en el formulario */ 
   const handleEditContent = (index) => {
     const contentData = sectionFromStore.contents[index];
     setContentToEdit({ ...contentData, index });
@@ -100,6 +101,15 @@ export default function SectionContentPage() {
     setLinkContent(contentData.linkContent);
     setDateTest(contentData.dateTest);
     setIsPartialContent(contentData.typeContent === '6');
+    handleOnClick('inicio');
+  }; 
+
+  const handleOnClick = (hash) => {
+    navigator.clipboard
+      .writeText(`${window.location.origin}${window.location.pathname}#${hash}`)
+      .then(() => {
+        window.location.replace(`${window.location.origin}${window.location.pathname}#${hash}`);
+      });
   };
 
   const handleDeleteContent = (index) => {
@@ -123,9 +133,11 @@ export default function SectionContentPage() {
 
   return (
     <>
+
       <div className="bg-white p-4 rounded-md shadow-md">
+        <div id="inicio"></div>
         <div className="flex justify-start py-5">
-          <Link to="/" className="bg-blue-500 text-white py-2 px-4 rounded-md inline-block mb-4 text-left"><i className="bi bi-arrow-left-square-fill"></i> Listado de Unidades</Link>
+          <Link to="/carta-descriptiva" className="bg-blue-500 text-white py-2 px-4 rounded-md inline-block mb-4 text-left"><i className="bi bi-arrow-left-square-fill"></i> Listado de Unidades</Link>
         </div>
         <h2 className="text-xl font-bold mb-4">Unidad - {sectionFromStore.title}</h2>
         {message && <p className="text-green-500 mb-2">{message}</p>}
