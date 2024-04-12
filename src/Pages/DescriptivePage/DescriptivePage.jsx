@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import useSectionStore from "../../hook/useStore";
 import { Link } from "react-router-dom";
 import ButtonGenerator from "../../components/Button";
 import ButtonCronogramaGenerator from "../../components/ButtonCronograma";
 
 const DescriptivePage = () => {
+    const formRef = useRef(null);
     let [titleSection, setTitleSection] = useState('');
     let [academicHours, setAcademicHours] = useState('');
     const [error, setError] = useState('');
@@ -57,6 +58,7 @@ const DescriptivePage = () => {
 
     const handleEdit = (index) => {
         setEditingIndex(index);
+        formRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
     const handleCancel = () => {
@@ -75,7 +77,7 @@ const DescriptivePage = () => {
                 <div className="bg-white p-4 rounded-md shadow-md w-full text-left">
                     <h2 className="text-xl font-bold mb-4">Formulario Carta Descriptiva</h2>
                     {message && <p className="text-green-500 mb-2">{message}</p>}
-                    <form onSubmit={handleSubmit}>
+                    <form ref={formRef} onSubmit={handleSubmit}>
                         <label className="block mb-2">
                             Título de la Unidad:
                             <input type="text" placeholder="Unidad 1: Conceptos y características de la P.O.O." value={titleSection} onChange={(e) => setTitleSection(e.target.value)} className="w-full p-2 border rounded-md" />
@@ -85,8 +87,13 @@ const DescriptivePage = () => {
                             <input type="text" placeholder="24 Hrs" value={academicHours} onChange={(e) => setAcademicHours(e.target.value)} className="w-full p-2 border rounded-md" />
                         </label>
                         {error && <p className="text-red-500 mb-2">{error}</p>}
-                        { editingIndex !== null ?
-                            <button type="submit" className="bg-blue-500 text-white p-2 rounded-md">Actualizar</button>
+                        {editingIndex !== null ?
+                            <div className="flex flex-col lg:flex-row items-center justify-center lg:justify-start space-x-2">
+                                <button type="submit" className="bg-blue-500 text-white p-2 rounded-md">Actualizar</button>
+                                <button type="button" className="bg-gray-500 text-white p-2 rounded-md mr-2" onClick={() => handleCancel()}>
+                                    Cancelar
+                                </button>
+                            </div>
                             :
                             <button type="submit" className="bg-blue-500 text-white p-2 rounded-md">Registrar</button>
                         }
@@ -118,14 +125,7 @@ const DescriptivePage = () => {
                                     <Link className="bg-blue-500 text-white p-2 rounded-lg mr-2"
                                         to={`/contenido/${index}`}
                                     >Contenido</Link>
-                                    { editingIndex === null ?
-                                        <button className="bg-yellow-500 text-white p-2 rounded-lg mr-2" onClick={() => handleEdit(index)} >Editar</button>
-                                        : 
-                                        editingIndex === index ?
-                                            <button className="bg-red-600 text-white p-2 rounded-lg mr-2" onClick={() => handleCancel()} >Cancelar</button>
-                                        :
-                                            null
-                                    }
+                                    <button className="bg-yellow-500 text-white p-2 rounded-lg mr-2" onClick={() => handleEdit(index)} >Editar</button>
                                     <button className="bg-red-600 text-white p-2 rounded-lg mr-2" onClick={() => handleDelete(index)} >Eliminar</button>
                                 </td>
                             </tr>
