@@ -1,3 +1,4 @@
+import JSZip from "jszip";
 import useSectionStore from "../hook/useStore";
 
 export default function ButtonGenerator() {
@@ -109,20 +110,22 @@ export default function ButtonGenerator() {
 
   const handleExportHTML = () => {
     const htmlContent = generateHTML();
+    const zip = new JSZip();
+    
+    zip.file('carta_descriptiva.html', htmlContent);
+    zip.generateAsync({ type: 'blob' }).then(function (content) {
+      // Crear una URL de objeto para el blob
+      const url = URL.createObjectURL(content);
 
-    // Crear un blob con el HTML generado
-    const blob = new Blob([htmlContent], { type: 'text/html' });
+      // Crear un enlace para la descarga
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'carta_descriptiva.zip';
+      a.click();
 
-    // Crear una URL de objeto para el blob
-    const url = URL.createObjectURL(blob);
-
-    // Crear un enlace para la descarga
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'carta_descriptiva.html';
-    a.click();
-
-    URL.revokeObjectURL(url);
+      // Revocar la URL de objeto
+      URL.revokeObjectURL(url);
+    });
   };
 
   return (
