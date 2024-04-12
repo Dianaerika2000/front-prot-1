@@ -5,6 +5,7 @@ import ButtonCronogramaGenerator from './components/ButtonCronograma'
 import Navbar from './components/layout/NavBar'
 import HomePage from './Pages/HomePage'
 import DatePeriodPage from './Pages/DatePeriodPage/DatePeriodPage'
+import SectionContentPage from './Pages/DescriptivePage/SectionContentPage'
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Navbar/>
         <Routes>
           <Route path='/' element={<HomePage/>}/>
+          <Route path='/contenido/:id' element={<SectionContentPage/>}/>
           <Route path='/periodo-academico' element={<DatePeriodPage/>}/>
           <Route path='/carta-descriptiva' element={<DescriptivePage/>}/>
           <Route path='/cronograma-html' element={<ButtonCronogramaGenerator/>}/>

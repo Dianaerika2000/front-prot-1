@@ -33,7 +33,7 @@ export default function NavBarMenu() {
           <ul className="flex space-x-4 text-white">
             <li className="nav-item">
               <Link className="text-uppercase active" to='/periodo-academico'>
-                Periodo Academico
+                Período Académico
               </Link>
             </li>
             <li className="nav-item">
