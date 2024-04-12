@@ -4,8 +4,10 @@ import DescriptivePage from './Pages/DescriptivePage/DescriptivePage'
 import SectionContentPage from './Pages/DescriptivePage/SectionContentPage'
 import ButtonGenerator from './components/Button'
 import ButtonCronogramaGenerator from './components/ButtonCronograma'
+import { useHashFragment } from "./hook/useHashFragment";
 
 function App() {
+  useHashFragment();
   return (
     <div className="App">
       <BrowserRouter>

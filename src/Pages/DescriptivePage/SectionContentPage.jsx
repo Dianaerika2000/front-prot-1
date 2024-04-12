@@ -88,7 +88,8 @@ export default function SectionContentPage() {
     setIsPartialContent(selectedTypeContent === '6');
   };
 
-  // Función para cargar los datos del contenido a editar en el formulario
+  
+  /** Función para cargar los datos del contenido a editar en el formulario */ 
   const handleEditContent = (index) => {
     const contentData = sectionFromStore.contents[index];
     console.log('contentData', contentData);
@@ -101,6 +102,15 @@ export default function SectionContentPage() {
     setLinkContent(contentData.linkContent);
     setDateTest(contentData.dateTest);
     setIsPartialContent(contentData.typeContent === '6');
+    handleOnClick('inicio');
+  }; 
+
+  const handleOnClick = (hash) => {
+    navigator.clipboard
+      .writeText(`${window.location.origin}${window.location.pathname}#${hash}`)
+      .then(() => {
+        window.location.replace(`${window.location.origin}${window.location.pathname}#${hash}`);
+      });
   };
 
   const handleDeleteContent = (index) => {
@@ -124,7 +134,9 @@ export default function SectionContentPage() {
 
   return (
     <>
+
       <div className="bg-white p-4 rounded-md shadow-md">
+        <h2 id="inicio">Inicio</h2>
         <div className="flex justify-start py-5">
           <Link to="/" className="bg-blue-500 text-white py-2 px-4 rounded-md inline-block mb-4 text-left"><i className="bi bi-arrow-left-square-fill"></i> Listado de Secciones</Link>
         </div>
