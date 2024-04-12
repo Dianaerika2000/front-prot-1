@@ -136,7 +136,7 @@ export default function SectionContentPage() {
     <>
 
       <div className="bg-white p-4 rounded-md shadow-md">
-        <h2 id="inicio">Inicio</h2>
+        <div id="inicio"></div>
         <div className="flex justify-start py-5">
           <Link to="/" className="bg-blue-500 text-white py-2 px-4 rounded-md inline-block mb-4 text-left"><i className="bi bi-arrow-left-square-fill"></i> Listado de Secciones</Link>
         </div>
