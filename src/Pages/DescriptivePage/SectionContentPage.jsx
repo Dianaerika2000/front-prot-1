@@ -137,7 +137,7 @@ export default function SectionContentPage() {
       <div className="bg-white p-4 rounded-md shadow-md">
         <div id="inicio"></div>
         <div className="flex justify-start py-5">
-          <Link to="/" className="bg-blue-500 text-white py-2 px-4 rounded-md inline-block mb-4 text-left"><i className="bi bi-arrow-left-square-fill"></i> Listado de Unidades</Link>
+          <Link to="/carta-descriptiva" className="bg-blue-500 text-white py-2 px-4 rounded-md inline-block mb-4 text-left"><i className="bi bi-arrow-left-square-fill"></i> Listado de Unidades</Link>
         </div>
         <h2 className="text-xl font-bold mb-4">Unidad - {sectionFromStore.title}</h2>
         {message && <p className="text-green-500 mb-2">{message}</p>}

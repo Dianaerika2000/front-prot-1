@@ -51,12 +51,12 @@ export default function DatePeriodComponent() {
       <h2 className="text-xl font-bold mb-4">Fechas de Período Académico</h2>
       {startDatePeriod && endDatePeriod && (
         <div className="mt-4 bg-blue-200 p-2 rounded-md">
-          <div className="flex space-x-8">
-            <div>
+          <div className="flex flex-col lg:flex-row items-center lg:justify-between">
+            <div className="mb-2 lg:mb-0 lg:mr-8">
               <p className="text-left">Fecha de Inicio: {startDatePeriod}</p>
               <p className="text-left">Fecha de Fin: {endDatePeriod}</p>
             </div>
-            <button onClick={handleEditPeriod} className="bg-yellow-500 text-white rounded-lg size-6">
+            <button onClick={handleEditPeriod} className="bg-yellow-500 text-white rounded-lg p-2">
               <i className="bi bi-pencil-square"></i>
             </button>
           </div>
@@ -76,7 +76,6 @@ export default function DatePeriodComponent() {
         ) : (
           <button type="submit" className="bg-blue-500 text-white p-2 rounded-md">Registrar</button>
         )}
-
       </form>
       {message && <p className="text-green-500 mt-2">{message}</p>}
     </div>
